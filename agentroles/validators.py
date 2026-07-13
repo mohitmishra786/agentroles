@@ -42,10 +42,14 @@ class ValidationResult:
         self.messages.append(ValidationMessage(ValidationLevel.INFO, message, **kwargs))  # type: ignore[arg-type]
 
     def warning(self, message: str, **kwargs: object) -> None:
-        self.messages.append(ValidationMessage(ValidationLevel.WARNING, message, **kwargs))  # type: ignore[arg-type]
+        self.messages.append(
+            ValidationMessage(ValidationLevel.WARNING, message, **kwargs)
+        )  # type: ignore[arg-type]
 
     def error(self, message: str, **kwargs: object) -> None:
-        self.messages.append(ValidationMessage(ValidationLevel.ERROR, message, **kwargs))  # type: ignore[arg-type]
+        self.messages.append(
+            ValidationMessage(ValidationLevel.ERROR, message, **kwargs)
+        )  # type: ignore[arg-type]
 
 
 ANTHROPIC_MODELS = {"opus", "sonnet", "haiku"}
@@ -71,7 +75,7 @@ def extract_model_family(model_id: str) -> str | None:
         return None
     model_name = parts[1].lower()
     if model_name.startswith("claude-"):
-        suffix = model_name[len("claude-"):]
+        suffix = model_name[len("claude-") :]
         for family in ANTHROPIC_MODELS:
             if suffix.startswith(family):
                 return family
@@ -89,7 +93,9 @@ def is_claude_model(model_id: str) -> bool:
 _VALIDATORS: list[Callable[[AgentRolesConfig, ValidationResult], None]] = []
 
 
-def register_validator(fn: Callable[[AgentRolesConfig, ValidationResult], None]) -> Callable:
+def register_validator(
+    fn: Callable[[AgentRolesConfig, ValidationResult], None],
+) -> Callable:
     _VALIDATORS.append(fn)
     return fn
 
@@ -128,7 +134,9 @@ def _check_model_format(config: AgentRolesConfig, result: ValidationResult) -> N
 
 
 @register_validator
-def _check_claude_code_compatibility(config: AgentRolesConfig, result: ValidationResult) -> None:
+def _check_claude_code_compatibility(
+    config: AgentRolesConfig, result: ValidationResult
+) -> None:
     if not config.has_target(TargetType.CLAUDE_CODE):
         return
     for role_name, role_config in config.roles.items():
@@ -174,23 +182,33 @@ def _check_target_paths(config: AgentRolesConfig, result: ValidationResult) -> N
     seen_types: set[str] = set()
     for entry in config.targets:
         if not isinstance(entry, dict) or len(entry) != 1:
-            result.error(f"Each target entry must be a single key-value pair, got: {entry}")
+            result.error(
+                f"Each target entry must be a single key-value pair, got: {entry}"
+            )
             continue
         for key in entry:
             if key in seen_types:
-                result.error(f"Duplicate target type '{key}' — each target type may only appear once")
+                result.error(
+                    f"Duplicate target type '{key}' — each target type may only appear once"
+                )
             seen_types.add(key)
             try:
                 TargetType(key)
             except ValueError:
-                result.warning(f"Unknown target type '{key}' — supported types: {[t.value for t in TargetType]}")
+                result.warning(
+                    f"Unknown target type '{key}' — supported types: {[t.value for t in TargetType]}"
+                )
 
 
 @register_validator
-def _check_roles_have_primary(config: AgentRolesConfig, result: ValidationResult) -> None:
+def _check_roles_have_primary(
+    config: AgentRolesConfig, result: ValidationResult
+) -> None:
     for role_name, role_config in config.roles.items():
         if not role_config.primary:
-            result.error(f"Role '{role_name}' has an empty primary model", role=role_name)
+            result.error(
+                f"Role '{role_name}' has an empty primary model", role=role_name
+            )
 
 
 def validate_file(path: str | Path) -> ValidationResult:

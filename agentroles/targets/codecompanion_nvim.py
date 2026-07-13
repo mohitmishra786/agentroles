@@ -47,13 +47,13 @@ class CodeCompanionNvimGenerator(TargetGenerator):
         adapter_blocks: list[str] = []
         for adapter_key, adapter_cfg in adapters.items():
             adapter_blocks.append(
-                f'    {adapter_key} = function()\n'
+                f"    {adapter_key} = function()\n"
                 f'      return require("codecompanion.adapters").extend("{adapter_cfg["name"]}", {{\n'
-                f'        env = {{\n'
+                f"        env = {{\n"
                 f'          model = "{adapter_cfg["model"]}",\n'
-                f'        }},\n'
-                f'      }})\n'
-                f'    end,'
+                f"        }},\n"
+                f"      }})\n"
+                f"    end,"
             )
 
         lua_lines: list[str] = [
@@ -68,13 +68,13 @@ class CodeCompanionNvimGenerator(TargetGenerator):
             "  },",
             "  opts = {",
             "    strategies = {",
-            '      chat = {',
+            "      chat = {",
             '        adapter = "anthropic",',
             "      },",
-            '      inline = {',
+            "      inline = {",
             '        adapter = "anthropic_fast",',
             "      },",
-            '      cmd = {',
+            "      cmd = {",
             '        adapter = "anthropic",',
             "      },",
             "    },",
@@ -87,7 +87,9 @@ class CodeCompanionNvimGenerator(TargetGenerator):
 
         return "\n".join(lua_lines) + "\n"
 
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         output_path = config.get_target_path(self.target_type)
         if not output_path:
             return

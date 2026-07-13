@@ -68,7 +68,11 @@ JSON_SCHEMA: dict = {
                             "description": "Signals that trigger escalation to the next fallback model.",
                             "items": {
                                 "type": "string",
-                                "enum": ["low_confidence", "test_failure", "plan_revision"],
+                                "enum": [
+                                    "low_confidence",
+                                    "test_failure",
+                                    "plan_revision",
+                                ],
                             },
                             "uniqueItems": True,
                         },

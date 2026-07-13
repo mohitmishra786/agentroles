@@ -29,7 +29,7 @@ class BitRouterGenerator(TargetGenerator):
 
             if role_config.fallback:
                 fallback_str = ", ".join(role_config.fallback)
-                lines.append(f'fallback_models = [{fallback_str}]')
+                lines.append(f"fallback_models = [{fallback_str}]")
 
             if role_config.max_cost_per_call_usd is not None:
                 lines.append(f"max_cost = {role_config.max_cost_per_call_usd}")
@@ -49,7 +49,9 @@ class BitRouterGenerator(TargetGenerator):
 
         return "\n".join(lines)
 
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         output_path = config.get_target_path(self.target_type)
         if not output_path:
             return

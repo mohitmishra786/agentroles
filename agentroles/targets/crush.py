@@ -54,7 +54,9 @@ class CrushGenerator(TargetGenerator):
                 }
 
             model_entry = {"name": model_name, "roles": [role_name]}
-            existing = [m for m in providers[provider_key]["models"] if m["name"] == model_name]
+            existing = [
+                m for m in providers[provider_key]["models"] if m["name"] == model_name
+            ]
             if not existing:
                 providers[provider_key]["models"].append(model_entry)
             else:
@@ -70,7 +72,9 @@ class CrushGenerator(TargetGenerator):
             "role_model_map": role_model_map,
         }
 
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         output_path = config.get_target_path(self.target_type)
         if not output_path:
             return

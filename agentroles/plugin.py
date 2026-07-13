@@ -71,11 +71,12 @@ class TargetGenerator(ABC):
 
     @property
     @abstractmethod
-    def target_type(self) -> TargetType:
-        ...
+    def target_type(self) -> TargetType: ...
 
     @abstractmethod
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         """Generate config files for this target tool.
 
         Args:

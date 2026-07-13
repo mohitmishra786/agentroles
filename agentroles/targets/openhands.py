@@ -32,13 +32,15 @@ class OpenHandsGenerator(TargetGenerator):
             lines.append('api_key = "${{LLM_API_KEY}}"')
 
             if role_config.notes:
-                lines.append(f'# notes: {role_config.notes}')
+                lines.append(f"# notes: {role_config.notes}")
 
             lines.append("")
 
         return "\n".join(lines)
 
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         output_path = config.get_target_path(self.target_type)
         if not output_path:
             return

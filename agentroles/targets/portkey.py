@@ -16,7 +16,12 @@ class PortkeyGenerator(TargetGenerator):
         return TargetType.PORTKEY
 
     def _build_role_config(self, role_name: str, role_config: RoleConfig) -> dict:
-        targets: list[dict] = [{"provider": role_config.primary.split("/")[0], "model": role_config.primary}]
+        targets: list[dict] = [
+            {
+                "provider": role_config.primary.split("/")[0],
+                "model": role_config.primary,
+            }
+        ]
 
         for fb in role_config.fallback:
             targets.append({"provider": fb.split("/")[0], "model": fb})
@@ -34,7 +39,9 @@ class PortkeyGenerator(TargetGenerator):
 
         return entry
 
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         output_path = config.get_target_path(self.target_type)
         if not output_path:
             return

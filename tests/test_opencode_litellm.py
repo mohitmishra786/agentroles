@@ -144,4 +144,6 @@ class TestLiteLLMGenerator:
             output_path = Path(result.files_written[0])
             content = yaml.safe_load(output_path.read_text())
             assert "router_settings" in content
-            assert content["router_settings"]["routing_strategy"] == "cache-aware-static"
+            assert (
+                content["router_settings"]["routing_strategy"] == "cache-aware-static"
+            )

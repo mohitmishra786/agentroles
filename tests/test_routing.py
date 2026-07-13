@@ -76,7 +76,9 @@ class TestEscalationRouter:
     def test_dynamic_mode_escalates_on_test_failure(self):
         config = _make_dynamic_config()
         router = EscalationRouter(config)
-        state = TaskState(current_role="implementer", last_model_used="anthropic/claude-haiku-4-5")
+        state = TaskState(
+            current_role="implementer", last_model_used="anthropic/claude-haiku-4-5"
+        )
 
         decision = router.route("implementer", state, StepOutcome.TEST_FAILURE)
         assert decision.escalated
@@ -102,7 +104,9 @@ class TestEscalationRouter:
             ),
         )
         router = EscalationRouter(config)
-        state = TaskState(current_role="implementer", last_model_used="anthropic/claude-haiku-4-5")
+        state = TaskState(
+            current_role="implementer", last_model_used="anthropic/claude-haiku-4-5"
+        )
 
         decision = router.route("implementer", state, StepOutcome.LOW_CONFIDENCE)
         assert decision.escalated
@@ -111,7 +115,9 @@ class TestEscalationRouter:
     def test_dynamic_mode_escalates_on_plan_revision(self):
         config = _make_dynamic_config()
         router = EscalationRouter(config)
-        state = TaskState(current_role="implementer", last_model_used="anthropic/claude-haiku-4-5")
+        state = TaskState(
+            current_role="implementer", last_model_used="anthropic/claude-haiku-4-5"
+        )
 
         decision = router.route("implementer", state, StepOutcome.PLAN_REVISION)
         assert decision.escalated
@@ -120,7 +126,9 @@ class TestEscalationRouter:
     def test_eskalation_exhausts_fallbacks(self):
         config = _make_dynamic_config()
         router = EscalationRouter(config)
-        state = TaskState(current_role="implementer", last_model_used="anthropic/claude-haiku-4-5")
+        state = TaskState(
+            current_role="implementer", last_model_used="anthropic/claude-haiku-4-5"
+        )
 
         decision = router.route("implementer", state, StepOutcome.TEST_FAILURE)
         assert decision.escalated
@@ -136,7 +144,11 @@ class TestEscalationRouter:
     def test_escalation_respects_max_limit(self):
         config = _make_dynamic_config()
         router = EscalationRouter(config)
-        state = TaskState(current_role="implementer", max_escalations=1, last_model_used="anthropic/claude-haiku-4-5")
+        state = TaskState(
+            current_role="implementer",
+            max_escalations=1,
+            last_model_used="anthropic/claude-haiku-4-5",
+        )
 
         decision = router.route("implementer", state, StepOutcome.TEST_FAILURE)
         assert decision.escalated
@@ -147,7 +159,9 @@ class TestEscalationRouter:
     def test_task_state_records_escalation(self):
         config = _make_dynamic_config()
         router = EscalationRouter(config)
-        state = TaskState(current_role="implementer", last_model_used="anthropic/claude-haiku-4-5")
+        state = TaskState(
+            current_role="implementer", last_model_used="anthropic/claude-haiku-4-5"
+        )
 
         router.route("implementer", state, StepOutcome.TEST_FAILURE)
         assert len(state.history) == 1
@@ -172,7 +186,9 @@ class TestCacheAwareness:
         assert not _CacheAwarenessEstimator.would_cause_cache_miss(
             "anthropic/claude-haiku-4-5", "anthropic/claude-sonnet-5"
         )
-        assert not _CacheAwarenessEstimator.would_cause_cache_miss("", "openai/gpt-4o-mini")
+        assert not _CacheAwarenessEstimator.would_cause_cache_miss(
+            "", "openai/gpt-4o-mini"
+        )
 
     def test_signal_severity_ordering(self):
         assert _CacheAwarenessEstimator.signal_severity(StepOutcome.SUCCESS) == 0
@@ -199,7 +215,9 @@ class TestCacheAwareness:
             ),
         )
         router = EscalationRouter(config)
-        state = TaskState(current_role="implementer", last_model_used="anthropic/claude-haiku-4-5")
+        state = TaskState(
+            current_role="implementer", last_model_used="anthropic/claude-haiku-4-5"
+        )
 
         decision = router.route("implementer", state, StepOutcome.LOW_CONFIDENCE)
         assert decision.cache_miss_suppressed
@@ -225,7 +243,9 @@ class TestCacheAwareness:
             ),
         )
         router = EscalationRouter(config)
-        state = TaskState(current_role="implementer", last_model_used="anthropic/claude-haiku-4-5")
+        state = TaskState(
+            current_role="implementer", last_model_used="anthropic/claude-haiku-4-5"
+        )
 
         decision = router.route("implementer", state, StepOutcome.TEST_FAILURE)
         assert decision.escalated

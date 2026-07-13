@@ -186,7 +186,9 @@ def _run_build(
     for target_type in config.enabled_target_types:
         generator_cls = GENERATOR_REGISTRY.get(target_type)
         if generator_cls is None:
-            overall.add_warning(f"No generator available for target type: {target_type.value}")
+            overall.add_warning(
+                f"No generator available for target type: {target_type.value}"
+            )
             continue
         generator = generator_cls()
         result = GenerationResult()
@@ -211,16 +213,41 @@ def main() -> None:
     "--targets",
     "-t",
     multiple=True,
-    type=click.Choice([
-        "opencode", "claude_code", "aider", "litellm_proxy",
-        "codex_cli", "gemini_cli", "qwen_code", "crush",
-        "cline", "goose", "openinterpreter", "kilocode",
-        "continue", "cody", "pearai", "zed_ai", "qodo",
-        "avante_nvim", "codecompanion_nvim", "ellama", "gptel",
-        "crewai", "autogen", "langgraph", "metagpt",
-        "openhands", "factory", "portkey", "manifest",
-        "bitrouter", "infermux",
-    ]),
+    type=click.Choice(
+        [
+            "opencode",
+            "claude_code",
+            "aider",
+            "litellm_proxy",
+            "codex_cli",
+            "gemini_cli",
+            "qwen_code",
+            "crush",
+            "cline",
+            "goose",
+            "openinterpreter",
+            "kilocode",
+            "continue",
+            "cody",
+            "pearai",
+            "zed_ai",
+            "qodo",
+            "avante_nvim",
+            "codecompanion_nvim",
+            "ellama",
+            "gptel",
+            "crewai",
+            "autogen",
+            "langgraph",
+            "metagpt",
+            "openhands",
+            "factory",
+            "portkey",
+            "manifest",
+            "bitrouter",
+            "infermux",
+        ]
+    ),
     help="Which target tools to generate configs for (can be specified multiple times). If not specified, all are offered interactively.",
 )
 @click.option(
@@ -234,9 +261,7 @@ def init(targets: tuple[str, ...], yes: bool) -> None:
     config_path = Path.cwd() / DEFAULT_CONFIG_FILE
 
     if config_path.exists() and not yes:
-        if not click.confirm(
-            f"{DEFAULT_CONFIG_FILE} already exists. Overwrite?"
-        ):
+        if not click.confirm(f"{DEFAULT_CONFIG_FILE} already exists. Overwrite?"):
             click.echo("Aborted.")
             return
 
@@ -290,21 +315,47 @@ def init(targets: tuple[str, ...], yes: bool) -> None:
     result = _run_build(config, Path.cwd(), verbose=True)
 
     if result.success:
-        click.secho(f"\nDone! Generated {len(result.files_written)} file(s) from {DEFAULT_CONFIG_FILE}.", fg="green")
+        click.secho(
+            f"\nDone! Generated {len(result.files_written)} file(s) from {DEFAULT_CONFIG_FILE}.",
+            fg="green",
+        )
     else:
         click.secho(f"\nDone with {len(result.errors)} error(s).", fg="yellow")
 
 
 def _interactive_target_selection() -> list[str]:
     targets = [
-        "opencode", "claude_code", "aider", "litellm_proxy",
-        "codex_cli", "gemini_cli", "qwen_code", "crush",
-        "cline", "goose", "openinterpreter", "kilocode",
-        "continue", "cody", "pearai", "zed_ai", "qodo",
-        "avante_nvim", "codecompanion_nvim", "ellama", "gptel",
-        "crewai", "autogen", "langgraph", "metagpt",
-        "openhands", "factory", "portkey", "manifest",
-        "bitrouter", "infermux",
+        "opencode",
+        "claude_code",
+        "aider",
+        "litellm_proxy",
+        "codex_cli",
+        "gemini_cli",
+        "qwen_code",
+        "crush",
+        "cline",
+        "goose",
+        "openinterpreter",
+        "kilocode",
+        "continue",
+        "cody",
+        "pearai",
+        "zed_ai",
+        "qodo",
+        "avante_nvim",
+        "codecompanion_nvim",
+        "ellama",
+        "gptel",
+        "crewai",
+        "autogen",
+        "langgraph",
+        "metagpt",
+        "openhands",
+        "factory",
+        "portkey",
+        "manifest",
+        "bitrouter",
+        "infermux",
     ]
     chosen: list[str] = []
     click.echo("Which target tools do you want to generate configs for?\n")
@@ -385,7 +436,10 @@ def build(config: str, verbose: bool) -> None:
         click.secho(f"\nGenerated {len(result.files_written)} file(s):", fg="green")
         click.echo(files)
     else:
-        click.secho("\nNo targets specified. Add a 'targets:' section to agentroles.yaml.", fg="yellow")
+        click.secho(
+            "\nNo targets specified. Add a 'targets:' section to agentroles.yaml.",
+            fg="yellow",
+        )
 
     if result.errors:
         click.secho(f"\n{len(result.errors)} error(s):", fg="red")
@@ -419,7 +473,9 @@ def validate(config: str) -> None:
     warning_count = len(result.warnings)
 
     for msg in result.messages:
-        prefix = {"error": "[ERROR]", "warning": "[WARN]", "info": "[INFO]"}[msg.level.value]
+        prefix = {"error": "[ERROR]", "warning": "[WARN]", "info": "[INFO]"}[
+            msg.level.value
+        ]
         color = {"error": "red", "warning": "yellow", "info": "white"}[msg.level.value]
         context = ""
         if msg.role:
@@ -431,7 +487,9 @@ def validate(config: str) -> None:
     if error_count == 0 and warning_count == 0:
         click.secho("\nAll checks passed. 0 errors, 0 warnings.", fg="green")
     elif error_count == 0:
-        click.secho(f"\nValidation passed with {warning_count} warning(s).", fg="yellow")
+        click.secho(
+            f"\nValidation passed with {warning_count} warning(s).", fg="yellow"
+        )
     else:
         click.secho(
             f"\nValidation failed: {error_count} error(s), {warning_count} warning(s).",

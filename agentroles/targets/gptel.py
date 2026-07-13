@@ -49,17 +49,17 @@ class GptelGenerator(TargetGenerator):
                 f"(defvar {backend_name}\n"
                 f'  (gptel-make-{backend} "{backend.capitalize()}"\n'
                 f'    :key (gptel-api-key-from-auth-source "api.{provider}.com")\n'
-                f'    :models (list {_elisp_str(model_id)})\n'
-                f'    :stream t))'
+                f"    :models (list {_elisp_str(model_id)})\n"
+                f"    :stream t))"
             )
 
         if not backend_defs:
             backend_defs.append(
-                '(defvar agentroles-default\n'
+                "(defvar agentroles-default\n"
                 '  (gptel-make-openai "GPT"\n'
                 '    :key (gptel-api-key-from-auth-source "api.openai.com")\n'
                 '    :models (list "gpt-4o")\n'
-                '    :stream t))'
+                "    :stream t))"
             )
             backend_names.append("agentroles-default")
 
@@ -82,7 +82,9 @@ class GptelGenerator(TargetGenerator):
 
         return elisp
 
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         output_path = config.get_target_path(self.target_type)
         if not output_path:
             return

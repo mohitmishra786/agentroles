@@ -52,14 +52,18 @@ class TestAiderSlotLimit:
     def test_extra_roles_trigger_warning(self):
         config = load_config(FIXTURES_DIR / "invalid_extra_aider_role.yaml")
         result = validate_config(config)
-        aider_warnings = [w for w in result.warnings if w.target and w.target.value == "aider"]
+        aider_warnings = [
+            w for w in result.warnings if w.target and w.target.value == "aider"
+        ]
         assert len(aider_warnings) > 0
         assert "not representable" in aider_warnings[0].message.lower()
 
     def test_aider_mappable_roles_no_warning(self):
         config = load_config(FIXTURES_DIR / "valid_aider_only.yaml")
         result = validate_config(config)
-        aider_warnings = [w for w in result.warnings if w.target and w.target.value == "aider"]
+        aider_warnings = [
+            w for w in result.warnings if w.target and w.target.value == "aider"
+        ]
         assert len(aider_warnings) == 0
 
 

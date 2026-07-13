@@ -13,31 +13,43 @@ FIXTURES_DIR = Path(__file__).parent / "fixtures"
 class TestCLIValidate:
     def test_validate_valid_full(self):
         runner = CliRunner()
-        result = runner.invoke(main, ["validate", "-c", str(FIXTURES_DIR / "valid_full.yaml")])
+        result = runner.invoke(
+            main, ["validate", "-c", str(FIXTURES_DIR / "valid_full.yaml")]
+        )
         assert result.exit_code == 0
         assert "PASSED" in result.output
 
     def test_validate_valid_minimal(self):
         runner = CliRunner()
-        result = runner.invoke(main, ["validate", "-c", str(FIXTURES_DIR / "valid_minimal.yaml")])
+        result = runner.invoke(
+            main, ["validate", "-c", str(FIXTURES_DIR / "valid_minimal.yaml")]
+        )
         assert result.exit_code == 0
         assert "PASSED" in result.output
 
     def test_validate_invalid_missing_roles(self):
         runner = CliRunner()
-        result = runner.invoke(main, ["validate", "-c", str(FIXTURES_DIR / "invalid_missing_roles.yaml")])
+        result = runner.invoke(
+            main, ["validate", "-c", str(FIXTURES_DIR / "invalid_missing_roles.yaml")]
+        )
         assert result.exit_code == 1
         assert "FAILED" in result.output
 
     def test_validate_claude_non_anthropic_shows_warning(self):
         runner = CliRunner()
-        result = runner.invoke(main, ["validate", "-c", str(FIXTURES_DIR / "invalid_claude_non_anthropic.yaml")])
+        result = runner.invoke(
+            main,
+            ["validate", "-c", str(FIXTURES_DIR / "invalid_claude_non_anthropic.yaml")],
+        )
         assert result.exit_code == 0
         assert "WARN" in result.output or "warning" in result.output.lower()
 
     def test_validate_extra_aider_role_shows_warning(self):
         runner = CliRunner()
-        result = runner.invoke(main, ["validate", "-c", str(FIXTURES_DIR / "invalid_extra_aider_role.yaml")])
+        result = runner.invoke(
+            main,
+            ["validate", "-c", str(FIXTURES_DIR / "invalid_extra_aider_role.yaml")],
+        )
         assert result.exit_code == 0
         assert "WARN" in result.output or "warning" in result.output.lower()
 

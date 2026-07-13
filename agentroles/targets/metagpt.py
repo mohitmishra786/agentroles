@@ -66,7 +66,9 @@ class MetaGPTGenerator(TargetGenerator):
 
         return cfg
 
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         output_path = config.get_target_path(self.target_type)
         if not output_path:
             return
@@ -80,6 +82,8 @@ class MetaGPTGenerator(TargetGenerator):
         header += "# MetaGPT config2.yaml — per-role LLM configuration\n"
         header += "# See: https://docs.deepwisdom.ai/main/en/guide/get_started/configuration.html\n\n"
 
-        content = header + yaml.dump(meta_cfg, default_flow_style=False, sort_keys=False, allow_unicode=True)
+        content = header + yaml.dump(
+            meta_cfg, default_flow_style=False, sort_keys=False, allow_unicode=True
+        )
         target.write_text(content)
         result.add_file(str(target))

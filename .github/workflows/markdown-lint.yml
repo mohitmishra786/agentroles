@@ -19,3 +19,6 @@ jobs:
             *.md
             targets/**/*.md
             .github/**/*.md
+          ignores: |
+            multi-model-agentic-coding-report.md
+            docs/targets-research.md

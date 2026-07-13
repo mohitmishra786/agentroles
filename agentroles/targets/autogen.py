@@ -54,7 +54,13 @@ class AutoGenGenerator(TargetGenerator):
     def target_type(self) -> TargetType:
         return TargetType.AUTOGEN
 
-    def _generate_agents_py(self, config: AgentRolesConfig, base_dir: Path, output_rel: str, result: GenerationResult) -> None:
+    def _generate_agents_py(
+        self,
+        config: AgentRolesConfig,
+        base_dir: Path,
+        output_rel: str,
+        result: GenerationResult,
+    ) -> None:
         target = base_dir / output_rel
 
         agent_blocks: list[str] = []
@@ -92,7 +98,9 @@ class AutoGenGenerator(TargetGenerator):
         target.write_text(content)
         result.add_file(str(target))
 
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         output_path = config.get_target_path(self.target_type)
         if not output_path:
             return

@@ -48,12 +48,21 @@ class TaskState:
             return self.last_model_used.split("/", 1)[0]
         return ""
 
-    def record_escalation(self, from_role: str, from_model: str, to_model: str, signal: StepOutcome) -> None:
-        self.history.append(EscalationRecord(
-            from_role=from_role, from_model=from_model, to_model=to_model, signal=signal
-        ))
+    def record_escalation(
+        self, from_role: str, from_model: str, to_model: str, signal: StepOutcome
+    ) -> None:
+        self.history.append(
+            EscalationRecord(
+                from_role=from_role,
+                from_model=from_model,
+                to_model=to_model,
+                signal=signal,
+            )
+        )
 
-    def has_escalation_signal(self, outcome: StepOutcome, signals: list[EscalationSignal]) -> bool:
+    def has_escalation_signal(
+        self, outcome: StepOutcome, signals: list[EscalationSignal]
+    ) -> bool:
         signal_map = {
             StepOutcome.TEST_FAILURE: EscalationSignal.TEST_FAILURE,
             StepOutcome.LOW_CONFIDENCE: EscalationSignal.LOW_CONFIDENCE,
@@ -131,8 +140,7 @@ class EscalationRouter:
     @property
     def is_dynamic_enabled(self) -> bool:
         return (
-            self._routing.mode == RoutingMode.DYNAMIC
-            and self._routing.dynamic.enabled
+            self._routing.mode == RoutingMode.DYNAMIC and self._routing.dynamic.enabled
         )
 
     def route(
@@ -163,7 +171,9 @@ class EscalationRouter:
         decision = RoutingDecision(model=role_config.primary, role=role)
 
         escalate_signals = self._routing.dynamic.escalate_on
-        should_escalate = task_state.has_escalation_signal(last_outcome, escalate_signals)
+        should_escalate = task_state.has_escalation_signal(
+            last_outcome, escalate_signals
+        )
 
         if not should_escalate:
             task_state.last_model_used = decision.model

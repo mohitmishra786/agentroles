@@ -40,23 +40,29 @@ class PearAIGenerator(TargetGenerator):
                 assigned_roles.add(mapped_role)
                 provider = _extract_provider(role_config.primary)
                 model_id = _extract_model(role_config.primary)
-                models.append({
-                    "model": model_id,
-                    "provider": provider,
-                    "roles": [mapped_role],
-                })
+                models.append(
+                    {
+                        "model": model_id,
+                        "provider": provider,
+                        "roles": [mapped_role],
+                    }
+                )
 
         for legacy_role in LEGACY_ROLES:
             if legacy_role not in assigned_roles:
-                models.append({
-                    "model": "gpt-4o-mini",
-                    "provider": "openai",
-                    "roles": [legacy_role],
-                })
+                models.append(
+                    {
+                        "model": "gpt-4o-mini",
+                        "provider": "openai",
+                        "roles": [legacy_role],
+                    }
+                )
 
         return models
 
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         output_path = config.get_target_path(self.target_type)
         if not output_path:
             return

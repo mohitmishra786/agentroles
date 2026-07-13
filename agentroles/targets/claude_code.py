@@ -31,7 +31,9 @@ class ClaudeCodeGenerator(TargetGenerator):
             return family, ""
         return "inherit", self._build_frontmatter_comment(role_name, primary)
 
-    def _build_agent_markdown(self, role_name: str, role_config, config: AgentRolesConfig) -> str:
+    def _build_agent_markdown(
+        self, role_name: str, role_config, config: AgentRolesConfig
+    ) -> str:
         model_value, comment = self._compute_model_field(role_name, role_config.primary)
 
         tools = self._resolve_tools(config)
@@ -69,7 +71,9 @@ class ClaudeCodeGenerator(TargetGenerator):
     def _resolve_tools(self, config: AgentRolesConfig) -> list[str]:
         return ["*"]
 
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         output_dir = config.get_target_path(self.target_type)
         if not output_dir:
             return

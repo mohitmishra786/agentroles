@@ -68,7 +68,13 @@ class LangGraphGenerator(TargetGenerator):
     def target_type(self) -> TargetType:
         return TargetType.LANGGRAPH
 
-    def _generate_workflow_py(self, config: AgentRolesConfig, base_dir: Path, output_rel: str, result: GenerationResult) -> None:
+    def _generate_workflow_py(
+        self,
+        config: AgentRolesConfig,
+        base_dir: Path,
+        output_rel: str,
+        result: GenerationResult,
+    ) -> None:
         target = base_dir / output_rel
 
         role_names = list(config.roles.keys())
@@ -83,7 +89,9 @@ class LangGraphGenerator(TargetGenerator):
             safe_name = role_name.replace("-", "_").replace(" ", "_")
             var_name = f"model_{safe_name}"
             model_vars[role_name] = var_name
-            chat_model_lines.append(f'{var_name} = ChatModel(model="{role_config.primary}")')
+            chat_model_lines.append(
+                f'{var_name} = ChatModel(model="{role_config.primary}")'
+            )
 
         chat_model_setup = CHAT_MODEL_SETUP_TEMPLATE.format(
             chat_models="\n".join(chat_model_lines),
@@ -104,7 +112,9 @@ class LangGraphGenerator(TargetGenerator):
         node_reg_lines: list[str] = []
         for role_name in role_names:
             safe_name = role_name.replace("-", "_").replace(" ", "_")
-            node_reg_lines.append(f'    workflow.add_node("{safe_name}", node_{safe_name})')
+            node_reg_lines.append(
+                f'    workflow.add_node("{safe_name}", node_{safe_name})'
+            )
 
         edge_lines: list[str] = []
         for i in range(len(role_names) - 1):
@@ -128,7 +138,9 @@ class LangGraphGenerator(TargetGenerator):
         target.write_text(content)
         result.add_file(str(target))
 
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         output_path = config.get_target_path(self.target_type)
         if not output_path:
             return

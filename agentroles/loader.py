@@ -25,7 +25,9 @@ def load_config(path: str | Path) -> AgentRolesConfig:
         raise ConfigLoadError(f"Config file is empty: {path}")
 
     if not isinstance(raw, dict):
-        raise ConfigLoadError(f"Config must be a YAML mapping, got {type(raw).__name__}")
+        raise ConfigLoadError(
+            f"Config must be a YAML mapping, got {type(raw).__name__}"
+        )
 
     if "roles" not in raw:
         raise ConfigLoadError("Missing required field: roles")

@@ -40,13 +40,21 @@ class CodyGenerator(TargetGenerator):
                 }
 
         if "chat" not in cfg["models"]:
-            cfg["models"]["chat"] = {"provider": "anthropic", "model": "claude-sonnet-4-5"}
+            cfg["models"]["chat"] = {
+                "provider": "anthropic",
+                "model": "claude-sonnet-4-5",
+            }
         if "autocomplete" not in cfg["models"]:
-            cfg["models"]["autocomplete"] = {"provider": "anthropic", "model": "claude-haiku-4-5"}
+            cfg["models"]["autocomplete"] = {
+                "provider": "anthropic",
+                "model": "claude-haiku-4-5",
+            }
 
         return cfg
 
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         output_path = config.get_target_path(self.target_type)
         if not output_path:
             return

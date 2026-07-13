@@ -56,19 +56,23 @@ class ClineGenerator(TargetGenerator):
             if model_name not in providers[provider_key]["availableModels"]:
                 providers[provider_key]["availableModels"].append(model_name)
 
-            role_mappings.append({
-                "role": role_name,
-                "provider": provider_key,
-                "model": model_name,
-                "description": role_config.notes or "",
-            })
+            role_mappings.append(
+                {
+                    "role": role_name,
+                    "provider": provider_key,
+                    "model": model_name,
+                    "description": role_config.notes or "",
+                }
+            )
 
         return {
             "providers": providers,
             "role_mappings": role_mappings,
         }
 
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         output_path = config.get_target_path(self.target_type)
         if not output_path:
             return

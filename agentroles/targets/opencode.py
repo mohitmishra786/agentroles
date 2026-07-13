@@ -23,7 +23,9 @@ class OpenCodeGenerator(TargetGenerator):
             agents[role_name] = agent_entry
         return {"agents": agents}
 
-    def generate(self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult) -> None:
+    def generate(
+        self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
+    ) -> None:
         output_path = config.get_target_path(self.target_type)
         if not output_path:
             return

@@ -53,18 +53,31 @@ class TargetType(str, Enum):
 
 class RoleConfig(BaseModel):
     primary: str = Field(..., description="Primary model in provider/model-id format")
-    fallback: list[str] = Field(default_factory=list, description="Ordered fallback models")
-    max_cost_per_call_usd: float | None = Field(default=None, description="Cost ceiling per call in USD")
-    notes: str | None = Field(default=None, description="Human-readable notes about this role")
+    fallback: list[str] = Field(
+        default_factory=list, description="Ordered fallback models"
+    )
+    max_cost_per_call_usd: float | None = Field(
+        default=None, description="Cost ceiling per call in USD"
+    )
+    notes: str | None = Field(
+        default=None, description="Human-readable notes about this role"
+    )
 
 
 class DynamicRoutingConfig(BaseModel):
-    enabled: bool = Field(default=False, description="Enable dynamic/escalation routing")
+    enabled: bool = Field(
+        default=False, description="Enable dynamic/escalation routing"
+    )
     escalate_on: list[EscalationSignal] = Field(
-        default_factory=lambda: [EscalationSignal.TEST_FAILURE, EscalationSignal.LOW_CONFIDENCE],
+        default_factory=lambda: [
+            EscalationSignal.TEST_FAILURE,
+            EscalationSignal.LOW_CONFIDENCE,
+        ],
         description="Signals that trigger escalation to fallback model",
     )
-    cache_aware: bool = Field(default=True, description="Consider cache-miss cost before escalating")
+    cache_aware: bool = Field(
+        default=True, description="Consider cache-miss cost before escalating"
+    )
 
     @classmethod
     def disabled(cls) -> DynamicRoutingConfig:
@@ -72,7 +85,9 @@ class DynamicRoutingConfig(BaseModel):
 
 
 class RoutingConfig(BaseModel):
-    mode: RoutingMode = Field(default=RoutingMode.STATIC, description="Routing strategy: static or dynamic")
+    mode: RoutingMode = Field(
+        default=RoutingMode.STATIC, description="Routing strategy: static or dynamic"
+    )
     dynamic: DynamicRoutingConfig = Field(
         default_factory=DynamicRoutingConfig.disabled,
         description="Dynamic/escalation routing settings (only used when mode=dynamic)",
@@ -80,23 +95,42 @@ class RoutingConfig(BaseModel):
 
 
 class ObservabilityConfig(BaseModel):
-    cost_tracking: bool = Field(default=True, description="Enable per-call cost tracking")
-    tag_calls_with_role: bool = Field(default=True, description="Tag outgoing requests with role metadata")
+    cost_tracking: bool = Field(
+        default=True, description="Enable per-call cost tracking"
+    )
+    tag_calls_with_role: bool = Field(
+        default=True, description="Tag outgoing requests with role metadata"
+    )
 
 
 class TargetConfig(BaseModel):
-    opencode: str | None = Field(default=None, description="Path to generated opencode.json")
-    claude_code: str | None = Field(default=None, description="Path to .claude/agents/ directory")
-    aider: str | None = Field(default=None, description="Path to generated .aider.conf.yml")
-    litellm_proxy: str | None = Field(default=None, description="Path to generated litellm-config.yaml")
+    opencode: str | None = Field(
+        default=None, description="Path to generated opencode.json"
+    )
+    claude_code: str | None = Field(
+        default=None, description="Path to .claude/agents/ directory"
+    )
+    aider: str | None = Field(
+        default=None, description="Path to generated .aider.conf.yml"
+    )
+    litellm_proxy: str | None = Field(
+        default=None, description="Path to generated litellm-config.yaml"
+    )
 
 
 class AgentRolesConfig(BaseModel):
-    version: Literal[1] = Field(default=1, description="Schema version — only 1 is supported")
-    roles: dict[str, RoleConfig] = Field(..., description="Role name → model configuration map")
-    routing: RoutingConfig = Field(default_factory=RoutingConfig, description="Routing strategy & configuration")
+    version: Literal[1] = Field(
+        default=1, description="Schema version — only 1 is supported"
+    )
+    roles: dict[str, RoleConfig] = Field(
+        ..., description="Role name → model configuration map"
+    )
+    routing: RoutingConfig = Field(
+        default_factory=RoutingConfig, description="Routing strategy & configuration"
+    )
     observability: ObservabilityConfig = Field(
-        default_factory=ObservabilityConfig, description="Cost tracking & observability settings"
+        default_factory=ObservabilityConfig,
+        description="Cost tracking & observability settings",
     )
     targets: list[dict[str, str]] = Field(
         default_factory=list,
