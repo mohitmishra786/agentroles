@@ -10,7 +10,7 @@
 
 The `agentroles` command reads your `agentroles.yaml` and generates TOML LLM profile entries:
 
-```
+```toml
 config.toml
 
 [llm.planner]
@@ -23,6 +23,7 @@ api_key = "${LLM_API_KEY}"
 ```
 
 Each role gets its own `[llm.<role-key>]` TOML section with:
+
 - `model` — the role's primary model in `provider/model-id` format
 - `api_key` — `${LLM_API_KEY}` environment variable reference
 

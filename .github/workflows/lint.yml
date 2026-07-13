@@ -32,5 +32,6 @@ jobs:
           node-version: "22"
           cache: "npm"
           cache-dependency-path: npm/package-lock.json
+      - run: npm install --package-lock-only 2>/dev/null || true
       - run: npx eslint . --ext .js,.mjs 2>/dev/null || echo "No eslint config yet — skipping"
       - run: npx prettier --check "**/*.{js,json,md,yaml}" 2>/dev/null || echo "No prettier config yet — skipping"

@@ -5,7 +5,9 @@
 
 ## Overview
 
-The Qwen Code target generates individual markdown files in `.qwen/agents/` — one per role — with YAML frontmatter containing the agent's name, description, and model assignment. This follows the Qwen Code subagent format.
+The Qwen Code target generates individual markdown files in `.qwen/agents/` — one per role — with
+YAML frontmatter containing the agent's name, description, and model assignment. This follows the
+Qwen Code subagent format.
 
 ## Configuration Format
 
@@ -25,6 +27,7 @@ You are the **planner** agent. ...
 ## Qwen Code Agent Format
 
 Qwen Code supports subagents via `.qwen/agents/`. Each subagent is a markdown file with:
+
 - `name` — the agent's identifier
 - `description` — what the agent does
 - `model` — the model this subagent should use

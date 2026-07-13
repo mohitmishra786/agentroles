@@ -2,10 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
-
 from agentroles.loader import load_config
-from agentroles.validators import ValidationLevel, validate_config, validate_file
+from agentroles.validators import validate_config, validate_file
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 

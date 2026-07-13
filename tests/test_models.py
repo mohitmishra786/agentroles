@@ -7,9 +7,7 @@ import pytest
 from agentroles.loader import ConfigLoadError, load_config
 from agentroles.models import (
     AgentRolesConfig,
-    ObservabilityConfig,
     RoleConfig,
-    RoutingConfig,
     RoutingMode,
     TargetType,
 )

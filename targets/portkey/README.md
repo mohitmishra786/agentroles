@@ -30,6 +30,7 @@ The `agentroles` command reads your `agentroles.yaml` and produces a JSON object
 ```
 
 Each role entry has:
+
 - `strategy` — `"fallback"` (tries each target in order, falling through on failure)
 - `targets` — ordered list of `{provider, model}` objects: primary first, then fallbacks
 - `override_params` — includes `max_tokens` when a cost ceiling is set

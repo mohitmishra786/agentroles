@@ -24,7 +24,9 @@ Roles with `notes` fields include a `description` key. Roles without notes get a
 
 ## Limitations
 
-None. OpenCode's `agents` config block is the best matching surface for `agentroles.yaml`. The `provider/model-id` format is identical to what agentroles stores internally. Every role maps cleanly with no information loss.
+None. OpenCode's `agents` config block is the best matching surface for `agentroles.yaml`.
+The `provider/model-id` format is identical to what agentroles stores internally.
+Every role maps cleanly with no information loss.
 
 ## Usage
 
