@@ -1,9 +1,7 @@
 from __future__ import annotations
 
-import json
 import tempfile
 from pathlib import Path
-from unittest.mock import patch
 
 from click.testing import CliRunner
 
