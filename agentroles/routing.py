@@ -23,7 +23,6 @@ from .models import (
     AgentRolesConfig,
     EscalationSignal,
     RoleConfig,
-    RoutingConfig,
     RoutingMode,
 )
 

@@ -6,7 +6,7 @@ import yaml
 
 from agentroles.models import AgentRolesConfig, TargetType
 from agentroles.plugin import GenerationResult, TargetGenerator
-from agentroles.validators import AIDER_ROLE_MAP, AIDER_SLOT_NAMES
+from agentroles.validators import AIDER_SLOT_NAMES
 
 AIDER_SLOT_NAMES_INV: dict[str, str] = {v: k for k, v in AIDER_SLOT_NAMES.items()}
 

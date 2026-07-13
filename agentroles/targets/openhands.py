@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from agentroles.models import AgentRolesConfig, RoleConfig, TargetType
+from agentroles.models import AgentRolesConfig, TargetType
 from agentroles.plugin import GenerationResult, TargetGenerator
 
 
@@ -29,7 +29,7 @@ class OpenHandsGenerator(TargetGenerator):
 
             lines.append(f"[llm.{role_key}]")
             lines.append(f'model = "{role_config.primary}"')
-            lines.append(f'api_key = "${{LLM_API_KEY}}"')
+            lines.append('api_key = "${{LLM_API_KEY}}"')
 
             if role_config.notes:
                 lines.append(f'# notes: {role_config.notes}')

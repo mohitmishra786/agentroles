@@ -49,7 +49,7 @@ from .targets.portkey import PortkeyGenerator
 from .targets.qodo import QodoGenerator
 from .targets.qwen_code import QwenCodeGenerator
 from .targets.zed_ai import ZedAIGenerator
-from .validators import ValidationLevel, validate_config
+
 
 DEFAULT_CONFIG_FILE = "agentroles.yaml"
 
@@ -417,7 +417,6 @@ def validate(config: str) -> None:
 
     error_count = len(result.errors)
     warning_count = len(result.warnings)
-    info_count = len([m for m in result.messages if m.level == ValidationLevel.INFO])
 
     for msg in result.messages:
         prefix = {"error": "[ERROR]", "warning": "[WARN]", "info": "[INFO]"}[msg.level.value]
@@ -430,7 +429,7 @@ def validate(config: str) -> None:
         click.secho(f"  {prefix} {msg.message}{context}", fg=color)
 
     if error_count == 0 and warning_count == 0:
-        click.secho(f"\nAll checks passed. 0 errors, 0 warnings.", fg="green")
+        click.secho("\nAll checks passed. 0 errors, 0 warnings.", fg="green")
     elif error_count == 0:
         click.secho(f"\nValidation passed with {warning_count} warning(s).", fg="yellow")
     else:

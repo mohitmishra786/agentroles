@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from agentroles.models import AgentRolesConfig, RoleConfig, TargetType
+from agentroles.models import AgentRolesConfig, TargetType
 from agentroles.plugin import GenerationResult, TargetGenerator
 
 
@@ -60,7 +60,6 @@ class AutoGenGenerator(TargetGenerator):
         agent_blocks: list[str] = []
         agent_var_names: list[str] = []
         first_model = None
-        first_description = ""
 
         for role_name, role_config in config.roles.items():
             safe_name = role_name.replace("-", "_").replace(" ", "_")
@@ -68,7 +67,6 @@ class AutoGenGenerator(TargetGenerator):
 
             if first_model is None:
                 first_model = role_config.primary
-                first_description = role_config.notes or f"AI agent for {role_name}"
 
             description = role_config.notes or f"AI agent for {role_name}"
             block = AGENT_BLOCK_TEMPLATE.format(

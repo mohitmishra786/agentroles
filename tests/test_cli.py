@@ -105,7 +105,7 @@ class TestCLIInit:
 
     def test_init_without_targets(self):
         runner = CliRunner()
-        with tempfile.TemporaryDirectory() as tmpdir:
+        with tempfile.TemporaryDirectory() as _tmpdir:
             result = runner.invoke(
                 main,
                 ["init", "-y", "--targets", "opencode"],

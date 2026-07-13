@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from agentroles.models import AgentRolesConfig, RoleConfig, TargetType
+from agentroles.models import AgentRolesConfig, TargetType
 from agentroles.plugin import GenerationResult, TargetGenerator
 
 
@@ -76,7 +76,6 @@ class LangGraphGenerator(TargetGenerator):
             result.add_warning("No roles found — langgraph_workflow.py will be empty")
             return
 
-        model_imports: list[str] = []
         model_vars: dict[str, str] = {}
         chat_model_lines: list[str] = []
 

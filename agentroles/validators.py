@@ -3,11 +3,9 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
-from typing import Callable, Iterator
+from typing import Callable
 
-import yaml
-
-from .models import AgentRolesConfig, RoleConfig, TargetType
+from .models import AgentRolesConfig, TargetType
 
 
 class ValidationLevel(str, Enum):

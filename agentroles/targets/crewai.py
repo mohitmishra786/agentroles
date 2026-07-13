@@ -4,7 +4,7 @@ from pathlib import Path
 
 import yaml
 
-from agentroles.models import AgentRolesConfig, RoleConfig, TargetType
+from agentroles.models import AgentRolesConfig, TargetType
 from agentroles.plugin import GenerationResult, TargetGenerator
 
 

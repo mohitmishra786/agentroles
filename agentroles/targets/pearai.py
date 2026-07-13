@@ -4,8 +4,6 @@ import json
 from pathlib import Path
 from typing import Any
 
-import yaml
-
 from agentroles.models import AgentRolesConfig, TargetType
 from agentroles.plugin import GenerationResult, TargetGenerator
 
