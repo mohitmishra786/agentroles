@@ -1,0 +1,82 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agentroles"
+version = "0.1.0"
+description = "Tool-agnostic role-to-model mapping for agentic coding workflows"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.11"
+authors = [
+    {name = "mohitmishra786"},
+]
+keywords = ["agentic", "coding", "llm", "routing", "multi-model", "config"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "click>=8.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+]
+
+[project.scripts]
+agentroles = "agentroles.cli:main"
+
+[project.entry-points."agentroles.targets"]
+opencode = "agentroles.targets.opencode:OpenCodeGenerator"
+claude_code = "agentroles.targets.claude_code:ClaudeCodeGenerator"
+aider = "agentroles.targets.aider:AiderGenerator"
+litellm_proxy = "agentroles.targets.litellm:LiteLLMGenerator"
+continue = "agentroles.targets.continue_:ContinueGenerator"
+cody = "agentroles.targets.cody:CodyGenerator"
+pearai = "agentroles.targets.pearai:PearAIGenerator"
+zed_ai = "agentroles.targets.zed_ai:ZedAIGenerator"
+qodo = "agentroles.targets.qodo:QodoGenerator"
+avante_nvim = "agentroles.targets.avante_nvim:AvanteNvimGenerator"
+codecompanion_nvim = "agentroles.targets.codecompanion_nvim:CodeCompanionNvimGenerator"
+ellama = "agentroles.targets.ellama:EllamaGenerator"
+gptel = "agentroles.targets.gptel:GptelGenerator"
+codex_cli = "agentroles.targets.codex_cli:CodexCLIGenerator"
+gemini_cli = "agentroles.targets.gemini_cli:GeminiCLIGenerator"
+qwen_code = "agentroles.targets.qwen_code:QwenCodeGenerator"
+crush = "agentroles.targets.crush:CrushGenerator"
+cline = "agentroles.targets.cline:ClineGenerator"
+goose = "agentroles.targets.goose:GooseGenerator"
+openinterpreter = "agentroles.targets.openinterpreter:OpenInterpreterGenerator"
+kilocode = "agentroles.targets.kilocode:KiloCodeGenerator"
+crewai = "agentroles.targets.crewai:CrewAIGenerator"
+autogen = "agentroles.targets.autogen:AutoGenGenerator"
+langgraph = "agentroles.targets.langgraph:LangGraphGenerator"
+metagpt = "agentroles.targets.metagpt:MetaGPTGenerator"
+openhands = "agentroles.targets.openhands:OpenHandsGenerator"
+factory = "agentroles.targets.factory:FactoryGenerator"
+portkey = "agentroles.targets.portkey:PortkeyGenerator"
+manifest = "agentroles.targets.manifest:ManifestGenerator"
+bitrouter = "agentroles.targets.bitrouter:BitRouterGenerator"
+infermux = "agentroles.targets.infermux:InferMuxGenerator"
+
+[tool.hatch.build.targets.wheel]
+packages = ["agentroles"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

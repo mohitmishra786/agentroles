@@ -1,0 +1,29 @@
+{
+  "name": "agentroles",
+  "version": "0.1.0",
+  "description": "Tool-agnostic role-to-model mapping for agentic coding workflows — npm wrapper for the Python package",
+  "license": "Apache-2.0",
+  "author": "mohitmishra786",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mohitmishra786/agentroles"
+  },
+  "bin": {
+    "agentroles": "./bin/agentroles.js"
+  },
+  "files": [
+    "bin/",
+    "index.js"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "agentic",
+    "coding",
+    "llm",
+    "routing",
+    "multi-model",
+    "config"
+  ]
+}

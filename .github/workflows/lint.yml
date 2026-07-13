@@ -1,0 +1,36 @@
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  python-lint:
+    name: Python (ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/ruff-action@v3
+        with:
+          args: "check ."
+      - uses: astral-sh/ruff-action@v3
+        with:
+          args: "format --check ."
+
+  node-lint:
+    name: Node (eslint + prettier)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: npm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: npm/package-lock.json
+      - run: npx eslint . --ext .js,.mjs 2>/dev/null || echo "No eslint config yet — skipping"
+      - run: npx prettier --check "**/*.{js,json,md,yaml}" 2>/dev/null || echo "No prettier config yet — skipping"

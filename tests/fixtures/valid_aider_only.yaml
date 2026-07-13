@@ -1,0 +1,12 @@
+version: 1
+
+roles:
+  planner:
+    primary: anthropic/claude-opus-4-8
+  implementer:
+    primary: anthropic/claude-haiku-4-5
+  summarizer:
+    primary: anthropic/claude-haiku-4-5
+
+targets:
+  - aider: ./.aider.conf.yml
