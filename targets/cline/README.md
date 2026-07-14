@@ -1,6 +1,6 @@
 # Cline Target
 
-**Target type:** `cline`  
+**Target type:** `cline`
 **Output file:** `.cline/providers.json`
 
 ## Overview
@@ -10,6 +10,7 @@ The Cline target generates a `.cline/providers.json` configuration file with pro
 ## Configuration Format
 
 The generated JSON contains:
+
 - `providers` — per-provider configuration with `provider` name, `apiKey` env var reference, `defaultModel`, and `availableModels` list
 - `role_mappings` — a list mapping each role to its provider, model, and description
 
@@ -19,7 +20,9 @@ Add to your `agentroles.yaml`:
 
 ```yaml
 targets:
+
   - cline: ./.cline/providers.json
+
 ```
 
 Then run:
@@ -34,4 +37,4 @@ Set the environment variables referenced in the config (e.g., `$OPENAI_API_KEY`,
 
 ## Reference
 
-- [Cline (VS Code Extension)](https://github.com/cline/cline)
+- [Cline (VS Code Extension)](https://GitHub.com/cline/cline)

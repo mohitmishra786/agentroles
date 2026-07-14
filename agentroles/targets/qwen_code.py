@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import yaml
+
 from agentroles.models import AgentRolesConfig, TargetType
 from agentroles.plugin import GenerationResult, TargetGenerator
 
@@ -34,13 +36,11 @@ class QwenCodeGenerator(TargetGenerator):
             ]
 
         lines: list[str] = ["---"]
-        for key, value in frontmatter.items():
-            if isinstance(value, list):
-                lines.append(f"{key}:")
-                for item in value:
-                    lines.append(f"  - {item}")
-            else:
-                lines.append(f"{key}: {value}")
+        lines.append(
+            yaml.safe_dump(
+                frontmatter, default_flow_style=False, sort_keys=False
+            ).rstrip()
+        )
         lines.append("---")
         lines.append("")
         lines.append(f"# {role_name.title()} Agent")

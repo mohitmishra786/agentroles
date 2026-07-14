@@ -35,5 +35,7 @@ If none of the three standard roles exist in your config, the generator warns an
 
 ```yaml
 targets:
+
   - aider: ./.aider.conf.yml
+
 ```

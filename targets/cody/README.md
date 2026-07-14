@@ -20,10 +20,14 @@ Cody uses a **dual-model architecture**: one model for chat (interactive convers
 ## Usage
 
 1. Add `cody` to your `agentroles.yaml` targets:
+
    ```yaml
    targets:
+
      - cody: ./.cody/config.json
+
    ```
+
 2. Run `agentroles build`
 3. Copy `.cody/config.json` to your Cody config directory or merge it with your existing Cody settings.
 

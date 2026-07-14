@@ -34,6 +34,7 @@ The `agentroles` command reads your `agentroles.yaml` and generates a routing re
 ```
 
 Each route:
+
 - Uses `X-Agent-Role` header to identify which role is making the request
 - Routes to the role's primary model and provider
 
@@ -41,7 +42,9 @@ Each route:
 
 ```bash
 agentroles build                     # generates manifest-routes.json
+
 # Import into Manifest's database or use as reference for manual setup
+
 ```
 
 ## Limitations

@@ -6,7 +6,9 @@ Generates a `litellm-config.yaml` file with per-role model entries, fallback cha
 
 ```yaml
 model_list:
+
   - model_name: role-planner
+
     litellm_params:
       model: anthropic/claude-opus-4-8
       metadata:
@@ -14,8 +16,10 @@ model_list:
         tags: ["agentroles", "planner"]
       max_cost_per_call_usd: 0.50
     fallbacks:
+
       - role-planner-fallback-0
   - model_name: role-planner-fallback-0
+
     litellm_params:
       model: openai/gpt-5.5
       metadata:
@@ -41,7 +45,9 @@ None. The LiteLLM proxy is the universal fallback target. Any tool that speaks O
 
 ```yaml
 targets:
+
   - litellm_proxy: ./litellm-config.yaml
+
 ```
 
 Start the proxy with: `litellm --config litellm-config.yaml`

@@ -55,7 +55,12 @@ class OpenInterpreterGenerator(TargetGenerator):
 
             if role_config.fallback:
                 role_preferences[role_name]["fallback"] = [
-                    self._extract_model_name(fb) for fb in role_config.fallback
+                    {
+                        "model": self._extract_model_name(fb),
+                        "provider": self._extract_provider(fb),
+                        "api_key": self._api_key_env(self._extract_provider(fb)),
+                    }
+                    for fb in role_config.fallback
                 ]
 
         first_role = next(iter(roles))

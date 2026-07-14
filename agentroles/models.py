@@ -103,21 +103,6 @@ class ObservabilityConfig(BaseModel):
     )
 
 
-class TargetConfig(BaseModel):
-    opencode: str | None = Field(
-        default=None, description="Path to generated opencode.json"
-    )
-    claude_code: str | None = Field(
-        default=None, description="Path to .claude/agents/ directory"
-    )
-    aider: str | None = Field(
-        default=None, description="Path to generated .aider.conf.yml"
-    )
-    litellm_proxy: str | None = Field(
-        default=None, description="Path to generated litellm-config.yaml"
-    )
-
-
 class AgentRolesConfig(BaseModel):
     version: Literal[1] = Field(
         default=1, description="Schema version — only 1 is supported"

@@ -7,12 +7,16 @@ Generates `.claude/agents/<role>.md` subagent files with YAML frontmatter for Cl
 One Markdown file per role in `.claude/agents/`, each with YAML frontmatter:
 
 ```markdown
----
+
+- --
+
 name: planner
 description: High-stakes reasoning, architecture decisions.
 model: opus
 tools: [*]
----
+
+- --
+
 ```
 
 ## Anthropic model constraint
@@ -20,14 +24,20 @@ tools: [*]
 Claude Code's `model:` field only accepts `sonnet`, `opus`, `haiku`, or `inherit`. If a role's primary model is not an Anthropic Claude model, the generated file uses `model: inherit` with a comment explaining the situation:
 
 ```markdown
----
+
+- --
+
 name: reviewer
 description: Code review agent
 model: inherit
 tools: [*]
----
-# WARNING: Primary model 'openai/gpt-5.5' is not an Anthropic Claude model.
-# Route requests through the LiteLLM proxy config instead.
+
+- --
+
+# WARNING: Primary model 'openai/gpt-5.5' is not an Anthropic Claude model
+
+# Route requests through the LiteLLM proxy config instead
+
 ```
 
 Roles that use Anthropic models have the family extracted automatically: `anthropic/claude-opus-4-8` becomes `model: opus`, `anthropic/claude-sonnet-5` becomes `model: sonnet`, and `anthropic/claude-haiku-4-5` becomes `model: haiku`.
@@ -41,5 +51,7 @@ Roles that use Anthropic models have the family extracted automatically: `anthro
 
 ```yaml
 targets:
+
   - claude_code: ./.claude/agents/
+
 ```

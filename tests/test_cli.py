@@ -113,7 +113,7 @@ class TestCLIInit:
             finally:
                 os.chdir(original_cwd)
 
-    def test_init_without_targets(self):
+    def test_init_with_single_target(self):
         runner = CliRunner()
         with tempfile.TemporaryDirectory() as _tmpdir:
             result = runner.invoke(
@@ -121,6 +121,28 @@ class TestCLIInit:
                 ["init", "-y", "--targets", "opencode"],
             )
             assert result.exit_code == 0
+
+    def test_init_without_targets(self):
+        import os
+
+        runner = CliRunner()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            original_cwd = os.getcwd()
+            os.chdir(tmpdir)
+            try:
+                result = runner.invoke(
+                    main,
+                    ["init", "-y"],
+                    input="n\n" * 31,
+                )
+                assert result.exit_code == 0
+
+                wd = Path(tmpdir)
+                assert (wd / "agentroles.yaml").exists()
+                content = (wd / "agentroles.yaml").read_text()
+                assert "targets: []" in content
+            finally:
+                os.chdir(original_cwd)
 
 
 class TestCLIHelp:

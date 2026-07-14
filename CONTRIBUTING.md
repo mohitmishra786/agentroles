@@ -27,7 +27,8 @@ class CrewAIGenerator(TargetGenerator):
         target = base_dir / output_path
         target.parent.mkdir(parents=True, exist_ok=True)
 
-        # Read config.roles, build your tool specific config, write it.
+# Read config.roles, build your tool specific config, write it
+
         crew_config = build_my_crew_config(config)
         target.write_text(crew_config)
         result.add_file(str(target))
@@ -37,8 +38,11 @@ Three things happen in `generate`:
 
 1. **Check for your target path.** If the user hasn't included your tool in their `targets:` list, return immediately.
 2. **Build the config.** `config.roles` is a dict of `RoleConfig` objects. Each has `primary`, `fallback`,
+
    `max_cost_per_call_usd`, and `notes`. You have the full validated model at your disposal.
+
 3. **Record what you wrote.** Call `result.add_file()` for each file. If something is off but not fatal, call
+
    `result.add_warning()`. Call `result.add_error()` for anything that should stop the build.
 
 ### Registering your generator
@@ -108,14 +112,21 @@ Tests cover:
 These are explicitly out of scope for v1. Each is a natural plugin:
 
 - **CrewAI / AutoGen / LangGraph generators**: Python code emits for per agent model binding. The plugin interface
+
   above was designed specifically so these can ship as separate packages.
-- **GitHub Copilot `.agent.md` generator**: The `.github/agents/*.agent.md` format is still evolving. Once it
+
+- **GitHub Copilot `.agent.md` generator**: The `.GitHub/agents/*.agent.md` format is still evolving. Once it
+
   stabilizes, this is a straightforward plugin.
+
 - **A trained complexity classifier for routing**: The current escalation router uses signal triggers only (test
+
   failure, low confidence, plan revision). A learned classifier for upfront difficulty estimation would be a separate
   plugin. The ACRouter paper showed these generalize poorly without coding specific training data, so this needs real
   research before it's a default.
+
 - **CrewAI native integration in the CLI**: The `crewai` target type doesn't exist yet in the enum. Adding it
+
   means either a PR to the enum or an external plugin via entry points.
 
 Each of these can be built and shipped independently, with zero changes to the agentroles core. That's the whole

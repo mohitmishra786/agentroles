@@ -1,6 +1,6 @@
 # OpenInterpreter Target
 
-**Target type:** `openinterpreter`  
+**Target type:** `openinterpreter`
 **Output file:** `.openinterpreter/config.json`
 
 ## Overview
@@ -26,7 +26,9 @@ Add to your `agentroles.yaml`:
 
 ```yaml
 targets:
+
   - openinterpreter: ./.openinterpreter/config.json
+
 ```
 
 Then run:
@@ -44,4 +46,4 @@ The generated JSON contains:
 
 ## Reference
 
-- [OpenInterpreter](https://github.com/openinterpreter/open-interpreter)
+- [OpenInterpreter](https://GitHub.com/openinterpreter/open-interpreter)

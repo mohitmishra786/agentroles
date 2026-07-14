@@ -15,6 +15,7 @@ Ellama has separate **per-function providers**, allowing different models for di
 | summarizer      | `ellama-summarization-provider`      |
 
 Ellama defines these provider variables:
+
 - `ellama-provider` (default/fallback)
 - `ellama-coding-provider`
 - `ellama-summarization-provider`
@@ -29,12 +30,17 @@ Ellama defines these provider variables:
 ## Usage
 
 1. Add `ellama` to your `agentroles.yaml` targets:
+
    ```yaml
    targets:
+
      - ellama: ./ellama.el
+
    ```
+
 2. Run `agentroles build`
 3. Load the generated config in your Emacs init:
+
    ```elisp
    (load-file "~/.emacs.d/ellama.el")
    ```

@@ -16,7 +16,7 @@ The `agentroles` command reads your `agentroles.yaml` and produces a LangGraph w
 4. Chains nodes in a linear sequence via `add_edge`, then routes the last node to `END`
 5. Provides `build_workflow()` and `run_workflow()` entry points
 
-```
+``` TypeScript
 langgraph_workflow.py
 ├── State = AgentState(messages, next)
 ├── model_<role1> = ChatModel(model="<primary1>")

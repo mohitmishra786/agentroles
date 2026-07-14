@@ -18,10 +18,18 @@ Usage:
     python crew.py
 """
 
+from pathlib import Path
+
+import yaml
 from crewai import Agent, Crew, Task
 
-from config.agents import AGENTS
-from config.tasks import TASKS
+_config_dir = Path(__file__).parent / "config"
+
+with open(_config_dir / "agents.yaml") as f:
+    AGENTS = yaml.safe_load(f)
+
+with open(_config_dir / "tasks.yaml") as f:
+    TASKS = yaml.safe_load(f)
 
 agents = [Agent(**a) for a in AGENTS]
 tasks = [Task(**t) for t in TASKS]

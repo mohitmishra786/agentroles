@@ -14,7 +14,7 @@ The `agentroles` command reads your `agentroles.yaml` and produces a Python scri
 2. Compiles all agents into a `SelectorGroupChat` using the first role's model as the selector
 3. Provides an `async main()` entry point that runs the group chat
 
-```
+``` bash
 autogen_agents.py
 ├── agent_<role1> = AssistantAgent(name="<role1>", model_client=...)
 ├── agent_<role2> = AssistantAgent(name="<role2>", model_client=...)

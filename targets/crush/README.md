@@ -1,6 +1,6 @@
 # Crush Target
 
-**Target type:** `crush`  
+**Target type:** `crush`
 **Output file:** `crush.json`
 
 ## Overview
@@ -17,7 +17,9 @@ Add to your `agentroles.yaml`:
 
 ```yaml
 targets:
+
   - crush: ./crush.json
+
 ```
 
 Then run:
@@ -29,6 +31,7 @@ agentroles build
 ## Configuration Format
 
 The generated JSON contains:
+
 - `providers` — per-provider config with `name`, `api_key`, and `models` list
 - `role_model_map` — mapping of each role to its provider and model
 
@@ -38,4 +41,4 @@ Set the environment variables referenced in the config (e.g., `$OPENAI_API_KEY`,
 
 ## Reference
 
-- [Crush](https://github.com/crush-org/crush)
+- [Crush](https://GitHub.com/crush-org/crush)

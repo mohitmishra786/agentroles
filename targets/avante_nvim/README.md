@@ -9,7 +9,7 @@ AgentRoles → avante.nvim:
 | AgentRoles Role | avante.nvim Setting          |
 |-----------------|------------------------------|
 | planner         | provider (main model)         |
-| implementer     | auto_suggestions_provider     |
+| implementer     | auto*suggestions*provider     |
 
 avante.nvim uses a Lua `setup()` function with two primary model settings: `provider`/`provider_model` for interactive AI conversations, and `auto_suggestions_provider`/`auto_suggestions_model` for inline code completion suggestions.
 
@@ -23,17 +23,32 @@ avante.nvim uses a Lua `setup()` function with two primary model settings: `prov
 ## Usage
 
 1. Add `avante_nvim` to your `agentroles.yaml` targets:
+
    ```yaml
    targets:
+
      - avante_nvim: ./avante.lua
+
    ```
+
 2. Run `agentroles build`
 3. In your Neovim config, load the generated file:
+
    ```lua
-   -- lazy.nvim
-   { import = "avante" }
-   -- or direct require
-   require("avante").setup(require("avante").opts)
+   - - lazy.nvim
+   return {
+     import = "avante",
+   }
+   - - or, pass the returned plugin-spec table to your plugin manager
+   - - The generated avante.lua returns a table with 'opts' containing provider/model settings:
+   - - {
+   - -   provider = "openai",
+   - -   provider_model = "gpt-4o",
+   - -   auto_suggestions_provider = "openai",
+   - -   auto_suggestions_model = "gpt-4o-mini",
+   - -   ...
+   - - }
+   - - Merge this into your avante.nvim configuration.
    ```
 
 ## Limitations

@@ -15,6 +15,7 @@ model. If roles are defined, the first role (typically `planner`) is used.
 ## Generated File
 
 - `.zed/settings.json` — JSON with `assistant.default_model` (provider + model) and
+
   `assistant.provider`. A `_notes` field documents which agentroles role was used and includes the
   original role notes.
 
@@ -24,7 +25,9 @@ model. If roles are defined, the first role (typically `planner`) is used.
 
    ```yaml
    targets:
+
      - zed_ai: ./.zed/settings.json
+
    ```
 
 2. Run `agentroles build`
@@ -33,9 +36,12 @@ model. If roles are defined, the first role (typically `planner`) is used.
 ## Limitations
 
 - **Single model only.** Zed AI cannot use different models for different tasks (chat, edit, inline
+
   assist all use the same model). The multi-role approach of agentroles is collapsed into one model.
+
 - Per-role notes are preserved in the `_notes` field for reference.
 - The settings file must be merged into your global `~/.config/zed/settings.json` — Zed does not
+
   read project-level settings for the AI assistant.
 
 ## Notes

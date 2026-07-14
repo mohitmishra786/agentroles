@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import yaml
+
 from agentroles.models import AgentRolesConfig, TargetType
 from agentroles.plugin import GenerationResult, TargetGenerator
 from agentroles.validators import extract_model_family, is_claude_model
@@ -49,11 +51,11 @@ class ClaudeCodeGenerator(TargetGenerator):
         }
 
         lines: list[str] = ["---"]
-        for key, value in frontmatter.items():
-            if isinstance(value, list):
-                lines.append(f"{key}: [{', '.join(value)}]")
-            else:
-                lines.append(f"{key}: {value}")
+        lines.append(
+            yaml.safe_dump(
+                frontmatter, default_flow_style=False, sort_keys=False
+            ).rstrip()
+        )
         lines.append("---")
 
         if comment:

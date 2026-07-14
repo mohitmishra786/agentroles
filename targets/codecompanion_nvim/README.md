@@ -15,6 +15,7 @@ codecompanion.nvim supports **multiple adapters**, each targeting a different st
 | summarizer      | `anthropic_fast`    |
 
 The adapter profiles are assigned to strategies:
+
 - `chat` → uses the planner's adapter (anthropic)
 - `inline` → uses the implementer's adapter (anthropic_fast)
 - `cmd` → uses the planner's adapter (anthropic)
@@ -26,14 +27,21 @@ The adapter profiles are assigned to strategies:
 ## Usage
 
 1. Add `codecompanion_nvim` to your `agentroles.yaml` targets:
+
    ```yaml
    targets:
+
      - codecompanion_nvim: ./codecompanion.lua
+
    ```
+
 2. Run `agentroles build`
 3. In your Neovim config:
+
    ```lua
-   -- lazy.nvim
+
+   - - lazy.nvim
+
    return require("codecompanion")
    ```
 

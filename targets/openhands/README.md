@@ -34,7 +34,9 @@ Role names are normalized: spaces become hyphens and the name is lowercased to f
 ```bash
 export LLM_API_KEY=your-api-key
 agentroles build
+
 # Start OpenHands — it reads config.toml from the working directory
+
 ```
 
 ## Limitations

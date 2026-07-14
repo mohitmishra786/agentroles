@@ -10,26 +10,37 @@
 
 The `agentroles` command reads your `agentroles.yaml` and generates droid definitions for the Factory platform:
 
-```
+``` yaml
 .factory/config.yaml
 
 droids:
+
   - name: planner
+
     description: High-stakes reasoning, architecture decisions
     model: anthropic/claude-opus-4-8
     fallback_models:
+
       - openai/gpt-5.5
+
     max_cost_per_call: 0.50
 
   - name: implementer
+
     description: Mechanical edits once a plan exists
     model: anthropic/claude-haiku-4-5
     fallback_models:
+
       - openai/gpt-4o-mini
+
     max_cost_per_call: 0.02
+
+cost_tracking:
+  enabled: true
 ```
 
 Each role becomes a droid with:
+
 - `name` — the role name
 - `description` — from `role.notes`, or a sensible default
 - `model` — the role's primary model
@@ -40,7 +51,9 @@ Each role becomes a droid with:
 
 ```bash
 agentroles build
+
 # Factory reads .factory/config.yaml automatically from the project root
+
 ```
 
 ## Limitations

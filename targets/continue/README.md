@@ -25,10 +25,14 @@ Both contain a `models` array with `model`, `provider`, and `roles` fields per e
 ## Usage
 
 1. Add `continue` to your `agentroles.yaml` targets:
+
    ```yaml
    targets:
+
      - continue: ./.continue/config.yaml
+
    ```
+
 2. Run `agentroles build`
 3. Continue will pick up the config from `.continue/config.yaml`
 

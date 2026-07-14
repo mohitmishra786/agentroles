@@ -8,8 +8,6 @@ from agentroles.models import AgentRolesConfig, TargetType
 from agentroles.plugin import GenerationResult, TargetGenerator
 from agentroles.validators import AIDER_SLOT_NAMES
 
-AIDER_SLOT_NAMES_INV: dict[str, str] = {v: k for k, v in AIDER_SLOT_NAMES.items()}
-
 
 class AiderGenerator(TargetGenerator):
     @property
@@ -19,13 +17,11 @@ class AiderGenerator(TargetGenerator):
     def _build_conf(self, config: AgentRolesConfig, result: GenerationResult) -> dict:
         conf: dict = {}
         unmapped: list[str] = []
-        mapped: dict[str, str] = {}
 
         for role_name, role_config in config.roles.items():
             if role_name in AIDER_SLOT_NAMES:
                 slot = AIDER_SLOT_NAMES[role_name]
                 conf[slot] = role_config.primary
-                mapped[role_name] = slot
             else:
                 unmapped.append(role_name)
 

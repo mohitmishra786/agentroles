@@ -12,7 +12,7 @@
 
 The `agentroles` command reads your `agentroles.yaml` and produces a full CrewAI project scaffold:
 
-```
+``` yaml
 crewai_output/
 ├── config/
 │   ├── agents.yaml    ← one Agent per role with primary model as llm
@@ -21,6 +21,7 @@ crewai_output/
 ```
 
 Each role becomes a CrewAI `Agent` with:
+
 - `role` — the role name from `agentroles.yaml`
 - `goal` — a synthesized goal based on the role name
 - `backstory` — from `role.notes`, or a sensible default

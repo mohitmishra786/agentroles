@@ -27,7 +27,9 @@ Unmapped roles receive defaults.
 
    ```yaml
    targets:
+
      - pearai: ./.pearai/config.json
+
    ```
 
 2. Run `agentroles build`
@@ -36,8 +38,11 @@ Unmapped roles receive defaults.
 ## Limitations
 
 - This adapter generates the config in the project directory, not in `~/.pearai/`.
+
   You must copy or symlink the file to the expected PearAI config location.
+
 - The format is identical to Continue's config. If you also use Continue, the `continue` target
+
   produces the same format at `.continue/config.yaml` and `.continue/config.json`.
 
 ## Notes

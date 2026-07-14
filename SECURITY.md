@@ -6,7 +6,7 @@ If you discover a security vulnerability in agentroles, please report it private
 
 Send a detailed description of the vulnerability to the maintainers via GitHub's private vulnerability reporting feature:
 
-1. Go to the [Security tab](https://github.com/mohitmishra786/agentroles/security) on the repository
+1. Go to the [Security tab](https://GitHub.com/mohitmishra786/agentroles/security) on the repository
 2. Click "Report a vulnerability"
 3. Provide a detailed description, including steps to reproduce and any proof-of-concept code
 

@@ -26,7 +26,6 @@ class GeminiCLIGenerator(TargetGenerator):
 
         first_role = next(iter(roles.items()))
         first_name, first_config = first_role
-        provider = self._extract_provider(first_config.primary)
         model_name = self._extract_model_name(first_config.primary)
 
         providers: dict[str, dict] = {}
@@ -53,8 +52,7 @@ class GeminiCLIGenerator(TargetGenerator):
             )
 
         return {
-            "model": model_name,
-            "provider": provider,
+            "model": {"name": model_name},
             "providers": providers,
             "roles_reference": role_ref,
         }

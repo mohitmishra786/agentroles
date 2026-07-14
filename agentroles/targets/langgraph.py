@@ -123,7 +123,11 @@ class LangGraphGenerator(TargetGenerator):
             edge_lines.append(f'    workflow.add_edge("{src}", "{dst}")')
 
         last_role = role_names[-1].replace("-", "_").replace(" ", "_")
-        conditional_routes = f'    workflow.add_conditional_edges("{last_role}", lambda s: END, {{END: END}})'
+        if len(role_names) > 1:
+            route_map = "{END: END}"
+            conditional_routes = f'    workflow.add_conditional_edges("{last_role}", lambda s: s.get("next", ""), {route_map})'
+        else:
+            conditional_routes = f'    workflow.add_conditional_edges("{last_role}", lambda s: END, {{END: END}})'
 
         content = LANGGRAPH_PY_TEMPLATE.format(
             chat_model_setup=chat_model_setup,

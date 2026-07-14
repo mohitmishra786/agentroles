@@ -73,10 +73,12 @@ observability:
   tag_calls_with_role: true
 
 targets:
+
   - opencode: ./opencode.json
   - claude_code: ./.claude/agents/
   - aider: ./.aider.conf.yml
   - litellm_proxy: ./litellm-config.yaml
+
 ```
 
 That's it. Roles can have fallbacks, cost ceilings, and notes. The routing
@@ -213,7 +215,7 @@ wrapper, not a reimplementation. The tradeoff is you still need Python available
 ## Installation from source
 
 ```bash
-git clone https://github.com/mohitmishra786/agentroles
+git clone https://GitHub.com/mohitmishra786/agentroles
 cd agentroles
 python -m venv .venv
 source .venv/bin/activate

@@ -213,41 +213,7 @@ def main() -> None:
     "--targets",
     "-t",
     multiple=True,
-    type=click.Choice(
-        [
-            "opencode",
-            "claude_code",
-            "aider",
-            "litellm_proxy",
-            "codex_cli",
-            "gemini_cli",
-            "qwen_code",
-            "crush",
-            "cline",
-            "goose",
-            "openinterpreter",
-            "kilocode",
-            "continue",
-            "cody",
-            "pearai",
-            "zed_ai",
-            "qodo",
-            "avante_nvim",
-            "codecompanion_nvim",
-            "ellama",
-            "gptel",
-            "crewai",
-            "autogen",
-            "langgraph",
-            "metagpt",
-            "openhands",
-            "factory",
-            "portkey",
-            "manifest",
-            "bitrouter",
-            "infermux",
-        ]
-    ),
+    type=click.Choice(list(TARGET_DESCRIPTIONS.keys())),
     help="Which target tools to generate configs for (can be specified multiple times). If not specified, all are offered interactively.",
 )
 @click.option(
@@ -282,7 +248,16 @@ def init(targets: tuple[str, ...], yes: bool) -> None:
     targets_entries = _build_target_entries(chosen_targets)
 
     config_text = SAMPLE_CONFIG
-    if targets_entries:
+    if not chosen_targets:
+        config_lines = config_text.split("\n")
+        targets_start = None
+        for i, line in enumerate(config_lines):
+            if line.strip() == "targets:":
+                targets_start = i
+                break
+        if targets_start is not None:
+            config_text = "\n".join(config_lines[:targets_start] + ["targets: []"])
+    elif targets_entries:
         config_lines = config_text.split("\n")
         targets_start = None
         for i, line in enumerate(config_lines):
@@ -324,39 +299,7 @@ def init(targets: tuple[str, ...], yes: bool) -> None:
 
 
 def _interactive_target_selection() -> list[str]:
-    targets = [
-        "opencode",
-        "claude_code",
-        "aider",
-        "litellm_proxy",
-        "codex_cli",
-        "gemini_cli",
-        "qwen_code",
-        "crush",
-        "cline",
-        "goose",
-        "openinterpreter",
-        "kilocode",
-        "continue",
-        "cody",
-        "pearai",
-        "zed_ai",
-        "qodo",
-        "avante_nvim",
-        "codecompanion_nvim",
-        "ellama",
-        "gptel",
-        "crewai",
-        "autogen",
-        "langgraph",
-        "metagpt",
-        "openhands",
-        "factory",
-        "portkey",
-        "manifest",
-        "bitrouter",
-        "infermux",
-    ]
+    targets = list(TARGET_DESCRIPTIONS.keys())
     chosen: list[str] = []
     click.echo("Which target tools do you want to generate configs for?\n")
     for t in targets:
@@ -377,7 +320,7 @@ def _build_target_entries(chosen: list[str]) -> list[str]:
         "qwen_code": "qwen_code: ./.qwen/agents/",
         "crush": "crush: ./crush.json",
         "cline": "cline: ./.cline/providers.json",
-        "goose": "goose: ./.goose/config.yaml",
+        "goose": "goose: ~/.config/goose/config.yaml",
         "openinterpreter": "openinterpreter: ./.openinterpreter/config.json",
         "kilocode": "kilocode: ./.kilocode/config.json",
         "continue": "continue: ./.continue/config.yaml",

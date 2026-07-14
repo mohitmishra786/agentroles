@@ -34,7 +34,9 @@ Add to your `agentroles.yaml`:
 
 ```yaml
 targets:
+
   - opencode: ./opencode.json
+
 ```
 
 OpenCode reads `opencode.json` from the project root automatically. No additional configuration needed.

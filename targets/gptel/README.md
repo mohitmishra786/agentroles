@@ -11,6 +11,7 @@ gptel uses **per-backend** configuration with `gptel-make-*` constructor functio
 | *(each role)*   | `agentroles-<role>` using `gptel-make-*`   |
 
 Each backend is defined with:
+
 - The appropriate `gptel-make-{gpt,claude,gemini,mistral}` function based on provider
 - The model name from the role's primary model
 - API key sourced from `auth-source`
@@ -25,15 +26,21 @@ All backends are collected in `agentroles-backends` for easy reference.
 ## Usage
 
 1. Add `gptel` to your `agentroles.yaml` targets:
+
    ```yaml
    targets:
+
      - gptel: ./gptel.el
+
    ```
+
 2. Run `agentroles build`
 3. Load the config in Emacs:
+
    ```elisp
    (load-file "~/.emacs.d/gptel.el")
    ```
+
 4. Switch backends with `M-x gptel-menu` or set `gptel-backend` to the desired role backend.
 
 ## Limitations

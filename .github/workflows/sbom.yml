@@ -10,9 +10,11 @@ jobs:
     name: Generate SBOM
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Build package
@@ -20,12 +22,12 @@ jobs:
           pip install build
           python -m build --sdist --wheel
       - name: Generate SBOM (Python)
-        uses: anchore/sbomnix-action@v1
+        uses: anchore/sbom-action@v0
         with:
           path: dist/
           output-file: agentroles-sbom.spdx.json
       - name: Upload SBOM as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: sbom
           path: agentroles-sbom.spdx.json

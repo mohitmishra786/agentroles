@@ -2,7 +2,7 @@
 
 "use strict";
 
-const { execSync } = require("child_process");
+const { execFileSync, execSync } = require("child_process");
 
 function checkNodeVersion() {
   const version = process.version;
@@ -25,7 +25,7 @@ checkNodeVersion();
 
 function ensurePython() {
   try {
-    const version = execSync("python3 --version", { encoding: "utf8" }).trim();
+    const version = execFileSync("python3", ["--version"], { encoding: "utf8" }).trim();
     const match = version.match(/Python (\d+)\.(\d+)/);
     if (!match) {
       console.error("agentroles: Could not parse Python version from:", version);
@@ -51,11 +51,11 @@ function ensurePython() {
 
 function ensurePipPackage(name, importName) {
   try {
-    execSync(`python3 -c "import ${importName}"`, { stdio: "ignore" });
+    execFileSync("python3", ["-c", `import ${importName}`], { stdio: "ignore" });
   } catch {
     console.error(`\nagentroles Python package not found. Installing via pip...\n`);
     try {
-      execSync(`python3 -m pip install ${name}`, { stdio: "inherit" });
+      execFileSync("python3", ["-m", "pip", "install", name], { stdio: "inherit" });
     } catch {
       console.error(
         `Failed to install ${name}. Try:\n  python3 -m pip install ${name}`
@@ -73,7 +73,7 @@ function main() {
   }
 
   try {
-    execSync(`python3 -m agentroles.cli ${args.join(" ")}`, { stdio: "inherit" });
+    execFileSync("python3", ["-m", "agentroles.cli", ...args], { stdio: "inherit" });
   } catch (e) {
     process.exit(e.status || 1);
   }

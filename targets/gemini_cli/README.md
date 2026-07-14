@@ -1,6 +1,6 @@
 # Gemini CLI Target
 
-**Target type:** `gemini_cli`  
+**Target type:** `gemini_cli`
 **Output file:** `.gemini/settings.json`
 
 ## Overview
@@ -17,7 +17,9 @@ Add to your `agentroles.yaml`:
 
 ```yaml
 targets:
+
   - gemini_cli: ./.gemini/settings.json
+
 ```
 
 Then run:
@@ -29,8 +31,8 @@ agentroles build
 ## Configuration Format
 
 The generated JSON contains:
-- `model` — the default model (from the first role)
-- `provider` — the provider of the default model
+
+- `model` — an object with a `name` field for the default model (from the first role)
 - `providers` — provider configurations with available models and API key env vars
 - `roles_reference` — mapping of role names to their model/provider assignments
 
@@ -40,4 +42,4 @@ Set the appropriate environment variable for your provider (e.g., `$OPENAI_API_K
 
 ## Reference
 
-- [Gemini CLI](https://github.com/google-gemini/gemini-cli)
+- [Gemini CLI](https://GitHub.com/google-gemini/gemini-cli)

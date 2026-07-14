@@ -98,14 +98,7 @@ class LiteLLMGenerator(TargetGenerator):
 
         if config.observability.cost_tracking:
             proxy_config.setdefault("litellm_settings", {})
-            proxy_config["litellm_settings"]["success_callback"] = (
-                ["prometheus"]
-                if "prometheus"
-                not in proxy_config.get("litellm_settings", {}).get(
-                    "success_callback", []
-                )
-                else proxy_config["litellm_settings"]["success_callback"]
-            )
+            proxy_config["litellm_settings"]["success_callback"] = ["prometheus"]
 
         return proxy_config
 

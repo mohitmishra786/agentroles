@@ -2,5 +2,4 @@
 description = "gitleaks allowlist"
 paths = [
   '''tests/fixtures/.*\.yaml''',
-  '''\.github/workflows/.*\.yml''',
 ]

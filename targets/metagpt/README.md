@@ -20,12 +20,13 @@ The `agentroles` command reads your `agentroles.yaml` and maps each role to Meta
 | any other role | `Custom_<rolename>` |
 
 Each mapped role gets an `llm` section with:
+
 - `api_type` — inferred from the provider prefix (`openai`, `anthropic`, `azure`)
 - `model` — the model ID portion of the primary model
 - `base_url` — default OpenAI-compatible endpoint
 - `api_key` — placeholder `YOUR_API_KEY`
 
-```
+``` yaml
 .metagpt/config2.yaml
 PM:
   llm:
@@ -44,7 +45,9 @@ Engineer:
 
 ```bash
 agentroles build
+
 # Then run MetaGPT — it will pick up .metagpt/config2.yaml automatically
+
 ```
 
 ## Limitations

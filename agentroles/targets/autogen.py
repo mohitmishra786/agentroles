@@ -42,9 +42,9 @@ if __name__ == "__main__":
 
 AGENT_BLOCK_TEMPLATE = """\
 {var_name} = AssistantAgent(
-    name="{role_name}",
-    model_client=OpenAIChatCompletionClient(model="{model}"),
-    description="{description}",
+    name={role_name!r},
+    model_client=OpenAIChatCompletionClient(model={model!r}),
+    description={description!r},
 )
 """
 
@@ -91,7 +91,7 @@ class AutoGenGenerator(TargetGenerator):
         content = AUTOGEN_PY_TEMPLATE.format(
             agent_blocks="\n".join(agent_blocks),
             agent_names=", ".join(agent_var_names),
-            first_role_model=f'OpenAIChatCompletionClient(model="{first_model}")',
+            first_role_model=f"OpenAIChatCompletionClient(model={first_model!r})",
         )
 
         target.parent.mkdir(parents=True, exist_ok=True)

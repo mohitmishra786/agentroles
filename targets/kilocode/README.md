@@ -1,6 +1,6 @@
 # Kilo Code Target
 
-**Target type:** `kilocode`  
+**Target type:** `kilocode`
 **Output file:** `.kilocode/config.json`
 
 ## Overview
@@ -12,6 +12,7 @@ The generated file includes `agent_type: "kilocode"` metadata to distinguish it 
 ## Compatibility with OpenCode Config
 
 Kilo Code reads configuration in the same format as OpenCode's `opencode.json`:
+
 - Top-level `agents` block mapping role names to model configurations
 - Each agent has a `model` field and optional `description`
 
@@ -23,7 +24,9 @@ Add to your `agentroles.yaml`:
 
 ```yaml
 targets:
+
   - kilocode: ./.kilocode/config.json
+
 ```
 
 Then run:
@@ -34,5 +37,5 @@ agentroles build
 
 ## Reference
 
-- [Kilo Code](https://github.com/Kilo-Org/kilocode)
+- [Kilo Code](https://GitHub.com/Kilo-Org/kilocode)
 - [OpenCode Agent Roles](https://opencode.ai/docs/guide/custom-agents)

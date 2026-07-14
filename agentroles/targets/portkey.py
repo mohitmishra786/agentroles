@@ -33,7 +33,9 @@ class PortkeyGenerator(TargetGenerator):
 
         override_params: dict = {}
         if role_config.max_cost_per_call_usd is not None:
-            override_params["max_tokens"] = 4096
+            override_params["max_tokens"] = max(
+                1, int(role_config.max_cost_per_call_usd * 50000)
+            )
         if override_params:
             entry["override_params"] = override_params
 

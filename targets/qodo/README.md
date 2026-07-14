@@ -14,6 +14,7 @@ directly to model references in Qodo's expected format:
 ## Generated File
 
 - `.qodo/config.json` — JSON with a `models` object mapping each role name to a `{ provider, model }`
+
   pair, plus a `_usage` field describing how to use the config.
 
 ## Usage
@@ -22,7 +23,9 @@ directly to model references in Qodo's expected format:
 
    ```yaml
    targets:
+
      - qodo: ./.qodo/config.json
+
    ```
 
 2. Run `agentroles build`
@@ -31,8 +34,11 @@ directly to model references in Qodo's expected format:
 ## Limitations
 
 - Qodo Gen's configuration format is evolving. This adapter generates a model reference mapping
+
   that should be adapted to your specific Qodo Gen integration.
+
 - Qodo includes Qodo Gen (IDE agent) and Qodo Merge (PR review). This adapter targets Qodo Gen
+
   specifically.
 
 ## Notes

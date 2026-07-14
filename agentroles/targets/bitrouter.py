@@ -1,9 +1,14 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from agentroles.models import AgentRolesConfig, TargetType
 from agentroles.plugin import GenerationResult, TargetGenerator
+
+
+def _toml_escape(value: str) -> str:
+    return json.dumps(value)
 
 
 class BitRouterGenerator(TargetGenerator):
@@ -25,10 +30,12 @@ class BitRouterGenerator(TargetGenerator):
             lines.append(f'provider = "{provider}"')
 
             if role_config.notes:
-                lines.append(f'description = """{role_config.notes}"""')
+                lines.append(f"description = {_toml_escape(role_config.notes)}")
 
             if role_config.fallback:
-                fallback_str = ", ".join(role_config.fallback)
+                fallback_str = ", ".join(
+                    _toml_escape(fb) for fb in role_config.fallback
+                )
                 lines.append(f"fallback_models = [{fallback_str}]")
 
             if role_config.max_cost_per_call_usd is not None:
