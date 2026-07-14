@@ -5,13 +5,16 @@
 
 ## Overview
 
-The Cline target generates a `.cline/providers.json` configuration file with provider entries, API key environment variable references, and role-to-model mappings.
+The Cline target generates a `.cline/providers.json` configuration file with
+provider entries, API key environment variable references, and role-to-model
+mappings.
 
 ## Configuration Format
 
 The generated JSON contains:
 
-- `providers` — per-provider configuration with `provider` name, `apiKey` env var reference, `defaultModel`, and `availableModels` list
+- `providers` — per-provider configuration with `provider` name, `apiKey` env
+  var reference, `defaultModel`, and `availableModels` list
 - `role_mappings` — a list mapping each role to its provider, model, and description
 
 ## Usage

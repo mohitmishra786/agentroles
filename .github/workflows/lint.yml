@@ -38,5 +38,5 @@ jobs:
         with:
           node-version: "22"
       - run: npm install
-      - run: npx eslint bin/ --ext .js 2>/dev/null || echo "No eslint violations"
-      - run: npx prettier --check "bin/**/*.js" --ignore-path /dev/null 2>/dev/null || echo "No prettier violations"
+      - run: npx eslint . 2>/dev/null || echo "No eslint violations"
+      - run: npx prettier --check "bin/**/*.js" 2>/dev/null || echo "No prettier violations"

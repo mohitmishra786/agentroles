@@ -13,7 +13,10 @@ AgentRoles → Continue roles:
 | reviewer        | apply            |
 | summarizer      | autocomplete     |
 
-Continue defines 6 model roles: `chat`, `edit`, `apply`, `autocomplete`, `embed`, `rerank`. The agentroles roles map to four of these; any unmapped roles (embed, rerank) receive a sensible default (`gpt-4o-mini` / `openai`) to ensure the config is valid.
+Continue defines 6 model roles: `chat`, `edit`, `apply`, `autocomplete`,
+`embed`, `rerank`. The agentroles roles map to four of these; any unmapped
+roles (embed, rerank) receive a sensible default (`gpt-4o-mini` / `openai`) to
+ensure the config is valid.
 
 ## Generated Files
 
@@ -38,9 +41,13 @@ Both contain a `models` array with `model`, `provider`, and `roles` fields per e
 
 ## Limitations
 
-- Embed and rerank roles are not mapped from agentroles roles. They receive sensible defaults. Customize these in the generated config if needed.
-- Continue uses a legacy `config.json` format alongside the newer `config.yaml`. Both are generated; Continue reads `config.yaml` if present.
+- Embed and rerank roles are not mapped from agentroles roles. They receive
+  sensible defaults. Customize these in the generated config if needed.
+- Continue uses a legacy `config.json` format alongside the newer
+  `config.yaml`. Both are generated; Continue reads `config.yaml` if present.
 
 ## Notes
 
-Continue was acquired by Cursor in 2025. The `.continue/config.yaml` format continues to work in PearAI (a fork of Continue) — see the `pearai` target for a dedicated adapter.
+Continue was acquired by Cursor in 2025. The `.continue/config.yaml` format
+continues to work in PearAI (a fork of Continue) — see the `pearai` target for
+a dedicated adapter.

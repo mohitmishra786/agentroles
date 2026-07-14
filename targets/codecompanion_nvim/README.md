@@ -4,7 +4,9 @@ Generates `codecompanion.lua` — a Lua configuration snippet for the codecompan
 
 ## Role Mapping
 
-codecompanion.nvim supports **multiple adapters**, each targeting a different strategy (chat, inline, cmd). This adapter maps roles to separate adapter profiles:
+codecompanion.nvim supports **multiple adapters**, each targeting a different
+strategy (chat, inline, cmd). This adapter maps roles to separate adapter
+profiles:
 
 | AgentRoles Role | Adapter Profile      |
 |-----------------|---------------------|
@@ -22,7 +24,9 @@ The adapter profiles are assigned to strategies:
 
 ## Generated File
 
-- `codecompanion.lua` — A lazy.nvim plugin spec with `adapters` functions and `strategies` mapping. Each adapter is defined as a function that calls `require("codecompanion.adapters").extend()` with the appropriate model.
+- `codecompanion.lua` — A lazy.nvim plugin spec with `adapters` functions and
+  `strategies` mapping. Each adapter is defined as a function that calls
+  `require("codecompanion.adapters").extend()` with the appropriate model.
 
 ## Usage
 
@@ -48,9 +52,14 @@ The adapter profiles are assigned to strategies:
 ## Limitations
 
 - The adapter mapping uses provider-based naming (anthropic, openai). Non-standard providers may need adjustments.
-- Each role maps to an adapter by its assigned provider, not by individual model. Multiple roles with the same provider will share an adapter profile (with the last one winning).
+- Each role maps to an adapter by its assigned provider, not by individual
+  model. Multiple roles with the same provider will share an adapter profile
+  (with the last one winning).
 - The generated Lua requires `codecompanion.nvim` and its dependencies (`plenary.nvim`, `nvim-treesitter`).
 
 ## Notes
 
-codecompanion.nvim provides a Copilot Chat-like experience in Neovim with support for multiple LLM backends. Its multi-adapter architecture allows assigning different models to different interaction strategies (chat vs. inline completions).
+codecompanion.nvim provides a Copilot Chat-like experience in Neovim with
+support for multiple LLM backends. Its multi-adapter architecture allows
+assigning different models to different interaction strategies (chat vs. inline
+completions).

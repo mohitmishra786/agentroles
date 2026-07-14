@@ -5,11 +5,15 @@
 
 ## Overview
 
-The Gemini CLI target generates a `.gemini/settings.json` configuration file with the primary model from the first defined role set as the default model, along with provider metadata and API key environment variable references.
+The Gemini CLI target generates a `.gemini/settings.json` configuration file
+with the primary model from the first defined role set as the default model,
+along with provider metadata and API key environment variable references.
 
 ## Limitations
 
-Gemini CLI supports **a single model per session**. The generator sets the first role's primary model as the default. To switch models for different role types, manually edit the `model` field in `.gemini/settings.json`.
+Gemini CLI supports **a single model per session**. The generator sets the
+first role's primary model as the default. To switch models for different role
+types, manually edit the `model` field in `.gemini/settings.json`.
 
 ## Usage
 

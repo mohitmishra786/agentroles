@@ -44,7 +44,10 @@ class CodeCompanionNvimGenerator(TargetGenerator):
         if "openai" not in adapters:
             adapters["openai"] = {"name": "openai", "model": "gpt-4o"}
         if "anthropic_fast" not in adapters:
-            adapters["anthropic_fast"] = {"name": "anthropic", "model": "claude-haiku-4-5"}
+            adapters["anthropic_fast"] = {
+                "name": "anthropic",
+                "model": "claude-haiku-4-5",
+            }
 
         adapter_blocks: list[str] = []
         for adapter_key, adapter_cfg in adapters.items():

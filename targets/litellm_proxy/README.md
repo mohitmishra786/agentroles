@@ -27,7 +27,8 @@ model_list:
         tags: ["agentroles", "planner", "fallback"]
 ```
 
-When dynamic routing is enabled, a `router_settings` block is included with `cache-aware-static` strategy, retry and cooldown settings.
+When dynamic routing is enabled, a `router_settings` block is included with
+`cache-aware-static` strategy, retry and cooldown settings.
 
 ## Features
 
@@ -39,7 +40,9 @@ When dynamic routing is enabled, a `router_settings` block is included with `cac
 
 ## Limitations
 
-None. The LiteLLM proxy is the universal fallback target. Any tool that speaks OpenAI-compatible HTTP can point at the generated proxy config and get per-role model routing without any tool-side changes.
+None. The LiteLLM proxy is the universal fallback target. Any tool that speaks
+OpenAI-compatible HTTP can point at the generated proxy config and get
+per-role model routing without any tool-side changes.
 
 ## Usage
 

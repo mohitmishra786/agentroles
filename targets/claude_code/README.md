@@ -21,7 +21,9 @@ tools: [*]
 
 ## Anthropic model constraint
 
-Claude Code's `model:` field only accepts `sonnet`, `opus`, `haiku`, or `inherit`. If a role's primary model is not an Anthropic Claude model, the generated file uses `model: inherit` with a comment explaining the situation:
+Claude Code's `model:` field only accepts `sonnet`, `opus`, `haiku`, or
+`inherit`. If a role's primary model is not an Anthropic Claude model, the
+generated file uses `model: inherit` with a comment explaining the situation:
 
 ```markdown
 
@@ -40,12 +42,18 @@ tools: [*]
 
 ```
 
-Roles that use Anthropic models have the family extracted automatically: `anthropic/claude-opus-4-8` becomes `model: opus`, `anthropic/claude-sonnet-5` becomes `model: sonnet`, and `anthropic/claude-haiku-4-5` becomes `model: haiku`.
+Roles that use Anthropic models have the family extracted automatically:
+`anthropic/claude-opus-4-8` becomes `model: opus`,
+`anthropic/claude-sonnet-5` becomes `model: sonnet`, and
+`anthropic/claude-haiku-4-5` becomes `model: haiku`.
 
 ## Limitations
 
-- Non-Anthropic models cannot be used directly via the `model:` field. Use the LiteLLM proxy target as a workaround: Claude Code points at the proxy, and the proxy routes each role to the correct model.
-- Claude Code loads subagent files at session start only. Editing a generated `.md` file requires restarting the Claude Code session.
+- Non-Anthropic models cannot be used directly via the `model:` field. Use the
+  LiteLLM proxy target as a workaround: Claude Code points at the proxy, and
+  the proxy routes each role to the correct model.
+- Claude Code loads subagent files at session start only. Editing a generated
+  `.md` file requires restarting the Claude Code session.
 
 ## Usage
 

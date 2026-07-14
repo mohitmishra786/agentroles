@@ -4,7 +4,8 @@ Generates `gptel.el` — an Emacs Lisp configuration snippet for the gptel packa
 
 ## Role Mapping
 
-gptel uses **per-backend** configuration with `gptel-make-*` constructor functions. This adapter creates one backend per role/provider combination:
+gptel uses **per-backend** configuration with `gptel-make-*` constructor
+functions. This adapter creates one backend per role/provider combination:
 
 | AgentRoles Role | gptel Backend                              |
 |-----------------|--------------------------------------------|
@@ -45,10 +46,19 @@ All backends are collected in `agentroles-backends` for easy reference.
 
 ## Limitations
 
-- API keys are configured via `auth-source` (`.authinfo` or `.netrc`). You must set these up separately with entries like `machine api.openai.com login apikey password <key>`.
-- Provider mapping: `openai` → `gptel-make-gpt`, `anthropic` → `gptel-make-claude`, `google` → `gptel-make-gemini`, `mistral` → `gptel-make-mistral`. Unknown providers fall through to use the raw provider name which may not have a corresponding `gptel-make-*` function.
-- gptel requires manual backend switching per session. There is no automatic role-based routing — use `gptel-menu` to select the appropriate backend.
+- API keys are configured via `auth-source` (`.authinfo` or `.netrc`). You
+  must set these up separately with entries like
+  `machine api.openai.com login apikey password <key>`.
+- Provider mapping: `openai` → `gptel-make-gpt`, `anthropic` →
+  `gptel-make-claude`, `google` → `gptel-make-gemini`, `mistral` →
+  `gptel-make-mistral`. Unknown providers fall through to use the raw provider
+  name which may not have a corresponding `gptel-make-*` function.
+- gptel requires manual backend switching per session. There is no automatic
+  role-based routing — use `gptel-menu` to select the appropriate backend.
 
 ## Notes
 
-gptel is a mature Emacs LLM client that supports OpenAI, Anthropic, Google, Mistral, and many OpenAI-compatible backends. Its multi-backend architecture lets you define multiple model configurations and switch between them at runtime, making it a natural fit for agentroles' multi-model approach.
+gptel is a mature Emacs LLM client that supports OpenAI, Anthropic, Google,
+Mistral, and many OpenAI-compatible backends. Its multi-backend architecture
+lets you define multiple model configurations and switch between them at
+runtime, making it a natural fit for agentroles' multi-model approach.

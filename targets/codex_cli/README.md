@@ -5,11 +5,14 @@
 
 ## Overview
 
-The Codex CLI target generates a `.codex/config.yaml` reference file that maps each role defined in `agentroles.yaml` to its primary model.
+The Codex CLI target generates a `.codex/config.yaml` reference file that
+maps each role defined in `agentroles.yaml` to its primary model.
 
 ## Limitations
 
-Codex CLI supports **a single model per session**. You switch models using the `--model` CLI flag or by editing the `model:` key in `.codex/config.yaml`. Multi-model role-based routing is not possible natively in Codex CLI.
+Codex CLI supports **a single model per session**. You switch models using
+the `--model` CLI flag or by editing the `model:` key in `.codex/config.yaml`.
+Multi-model role-based routing is not possible natively in Codex CLI.
 
 To work with multiple roles:
 

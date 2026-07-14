@@ -5,7 +5,10 @@
 
 ## Overview
 
-The Kilo Code target generates a `.kilocode/config.json` file using the **same format** as the OpenCode target. This is possible because Kilo Code is a fork of OpenCode that reads `opencode.json` — the config format is compatible.
+The Kilo Code target generates a `.kilocode/config.json` file using the
+**same format** as the OpenCode target. This is possible because Kilo Code is
+a fork of OpenCode that reads `opencode.json` — the config format is
+compatible.
 
 The generated file includes `agent_type: "kilocode"` metadata to distinguish it from a standard OpenCode config.
 
@@ -16,7 +19,8 @@ Kilo Code reads configuration in the same format as OpenCode's `opencode.json`:
 - Top-level `agents` block mapping role names to model configurations
 - Each agent has a `model` field and optional `description`
 
-The only difference is the `agent_type` metadata field, which is ignored by OpenCode but helps identify the config's target tool.
+The only difference is the `agent_type` metadata field, which is ignored by
+OpenCode but helps identify the config's target tool.
 
 ## Usage
 

@@ -5,7 +5,8 @@
 
 ## Overview
 
-The Goose target generates a `~/.config/goose/config.yaml` configuration with provider and model assignments for each role defined in `agentroles.yaml`.
+The Goose target generates a `~/.config/goose/config.yaml` configuration with
+provider and model assignments for each role defined in `agentroles.yaml`.
 
 ## Configuration Format
 
@@ -15,7 +16,8 @@ The generated YAML contains:
 - `providers` — per-provider configuration with `type`, `api_key` env var reference, and `default_model`
 - `roles` — each role's provider, model, and description
 
-Goose supports [15+ providers](https://block.GitHub.io/goose/docs/provider-reference) including OpenAI, Anthropic, Google, Groq, DeepSeek, Ollama, and more.
+Goose supports [15+ providers](https://block.GitHub.io/goose/docs/provider-reference)
+including OpenAI, Anthropic, Google, Groq, DeepSeek, Ollama, and more.
 
 ## Usage
 
