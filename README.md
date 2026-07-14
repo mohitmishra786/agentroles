@@ -1,13 +1,27 @@
 # agentroles
 
 > "The difference between a good tool and a great tool is how much thinking it saves you for free."
-> — borrowed from a conversation with a colleague who was tired of editing five config files every time we swapped a model
+> — borrowed from a conversation with a colleague who was tired of editing five
+> config files every time we swapped a model
 
-Here's the problem: every single agentic coding tool (OpenCode, Claude Code, Aider, LiteLLM) lets you assign different models to different roles. That's table stakes now. The real friction is that they each invented their own config dialect. OpenCode does `provider/model-id` in JSON. Claude Code does `model: sonnet` in YAML frontmatter. Aider does `--editor-model` flags and a `.aider.conf.yml`. None of them talk to each other.
+Here's the problem: every single agentic coding tool (OpenCode, Claude Code,
+Aider, LiteLLM) lets you assign different models to different roles.
+That's table stakes now. The real friction is that they each invented their own
+config dialect. OpenCode does `provider/model-id` in JSON. Claude Code does
+`model: sonnet` in YAML frontmatter. Aider does `--editor-model` flags and a
+`.aider.conf.yml`. None of them talk to each other.
 
-So you end up hand maintaining the same "planner uses Opus, implementer uses Haiku" logic in three or four places. You push a model change to OpenCode, forget Claude Code, and suddenly your review agent is running on a model you didn't intend. This isn't speculation. This is what happens in practice when you have more than one tool in your workflow.
+So you end up hand maintaining the same "planner uses Opus, implementer uses
+Haiku" logic in three or four places. You push a model change to OpenCode,
+forget Claude Code, and suddenly your review agent is running on a model you
+didn't intend. This isn't speculation. This is what happens in practice when
+you have more than one tool in your workflow.
 
-**agentroles** is a single YAML file where you describe which model handles which role, and then it generates the native configs for every tool you use. You never hand write `opencode.json` agent blocks or Claude Code subagent frontmatter again. Delete agentroles entirely and every file it generated keeps working. It's a config compiler, not a runtime you have to keep alive.
+**agentroles** is a single YAML file where you describe which model handles
+which role, and then it generates the native configs for every tool you use.
+You never hand write `opencode.json` agent blocks or Claude Code subagent
+frontmatter again. Delete agentroles entirely and every file it generated keeps
+working. It's a config compiler, not a runtime you have to keep alive.
 
 ## If you're impatient
 
@@ -16,7 +30,11 @@ pip install agentroles
 agentroles init
 ```
 
-That asks which tools you use, drops a reasonable `agentroles.yaml` into your project root, and immediately generates all the tool specific configs. If you like what you see, `agentroles build` regenerates them on demand. `agentroles validate` checks for the common gotchas like assigning a non Anthropic model to a Claude Code subagent.
+That asks which tools you use, drops a reasonable `agentroles.yaml` into your
+project root, and immediately generates all the tool specific configs. If you
+like what you see, `agentroles build` regenerates them on demand.
+`agentroles validate` checks for the common gotchas like assigning a non
+Anthropic model to a Claude Code subagent.
 
 What you get out:
 
@@ -61,7 +79,9 @@ targets:
   - litellm_proxy: ./litellm-config.yaml
 ```
 
-That's it. Roles can have fallbacks, cost ceilings, and notes. The routing block defaults to static (just generate configs) with an opt in dynamic mode if you want runtime escalation. Everything is optional except `version` and `roles`.
+That's it. Roles can have fallbacks, cost ceilings, and notes. The routing
+block defaults to static (just generate configs) with an opt in dynamic mode
+if you want runtime escalation. Everything is optional except `version` and `roles`.
 
 ## Schema reference
 
@@ -115,31 +135,55 @@ Tools aren't equal in what they let you configure. This table is honest about th
 
 ### Claude Code: the Anthropic constraint explained
 
-Claude Code's `model:` field in subagent frontmatter only accepts `sonnet`, `opus`, `haiku`, or `inherit`. That's it. No OpenAI models, no Gemini, no DeepSeek.
+Claude Code's `model:` field in subagent frontmatter only accepts `sonnet`,
+`opus`, `haiku`, or `inherit`. That's it. No OpenAI models, no Gemini, no DeepSeek.
 
-If you assign a non Anthropic model to a role and you have `claude_code` as a target, agentroles generates the file with `model: inherit` and a clear comment at the top explaining the situation. It tells you to either pick an Anthropic model for that role or route it through the LiteLLM proxy instead. It never silently drops the model or fabricates a mapping that doesn't exist.
+If you assign a non Anthropic model to a role and you have `claude_code` as a
+target, agentroles generates the file with `model: inherit` and a clear comment
+at the top explaining the situation. It tells you to either pick an Anthropic
+model for that role or route it through the LiteLLM proxy instead. It never
+silently drops the model or fabricates a mapping that doesn't exist.
 
 ### Aider: three slots, no more
 
-Aider has exactly three model slots: `--model` (main/architect), `--editor-model` (mechanical editor), and `--weak-model` (summaries and commit messages). We map `planner -> model`, `implementer -> editor-model`, `summarizer -> weak-model` by convention.
+Aider has exactly three model slots: `--model` (main/architect),
+`--editor-model` (mechanical editor), and `--weak-model` (summaries and commit
+messages). We map `planner -> model`, `implementer -> editor-model`,
+`summarizer -> weak-model` by convention.
 
-If your `agentroles.yaml` defines more roles than those three, the extras get reported explicitly in the build output: "these roles are not representable in Aider, skipping." You'll see exactly which ones and why. They're not silently dropped.
+If your `agentroles.yaml` defines more roles than those three, the extras get
+reported explicitly in the build output: "these roles are not representable in
+Aider, skipping." You'll see exactly which ones and why. They're not silently dropped.
 
 ## Routing modes
 
 ### Static (the default)
 
-Reads the YAML, generates configs. No runtime process, no network calls, nothing to keep alive. This is where you should start. It's deterministic and you can check the generated files into version control.
+Reads the YAML, generates configs. No runtime process, no network calls,
+nothing to keep alive. This is where you should start. It's deterministic and
+you can check the generated files into version control.
 
 ### Dynamic / escalation (opt in)
 
-When you set `routing.mode: dynamic` and `routing.dynamic.enabled: true`, each task starts on the role's primary model and only moves to the next fallback when something concrete happens: a test fails, the model self reports low confidence, or the plan needs revision mid task.
+When you set `routing.mode: dynamic` and `routing.dynamic.enabled: true`, each
+task starts on the role's primary model and only moves to the next fallback
+when something concrete happens: a test fails, the model self reports low
+confidence, or the plan needs revision mid task.
 
-This is signal triggered escalation, not upfront classification. We deliberately avoid trying to guess task difficulty before the model even starts. That approach generalizes poorly on real agentic coding tasks (the ACRouter paper published in 2026 found simple classifiers degrading by 9-21% accuracy out of distribution, sometimes worse than random).
+This is signal triggered escalation, not upfront classification. We deliberately
+avoid trying to guess task difficulty before the model even starts. That approach
+generalizes poorly on real agentic coding tasks (the ACRouter paper published in
+2026 found simple classifiers degrading by 9-21% accuracy out of distribution,
+sometimes worse than random).
 
-With `cache_aware: true`, the router suppresses cross provider escalation for low severity signals. Switching from Anthropic to OpenAI mid session dumps your KV cache on both sides. That cost can easily erase whatever savings you hoped to get from using a cheaper fallback. The router only allows the switch when the signal severity justifies it (test failure, plan revision).
+With `cache_aware: true`, the router suppresses cross provider escalation for
+low severity signals. Switching from Anthropic to OpenAI mid session dumps your
+KV cache on both sides. That cost can easily erase whatever savings you hoped
+to get from using a cheaper fallback. The router only allows the switch when
+the signal severity justifies it (test failure, plan revision).
 
-The escalation runtime is small, well tested, and completely optional. If you disable it, everything behaves identically to static mode with zero overhead.
+The escalation runtime is small, well tested, and completely optional. If you
+disable it, everything behaves identically to static mode with zero overhead.
 
 ## CLI commands
 
@@ -162,7 +206,9 @@ If you'd rather use npx than manage a Python environment:
 npx agentroles init
 ```
 
-The npm package shells out to the Python package. It checks for Python 3.11+ on your PATH and installs the pip package if missing. This is a convenience wrapper, not a reimplementation. The tradeoff is you still need Python available.
+The npm package shells out to the Python package. It checks for Python 3.11+ on
+your PATH and installs the pip package if missing. This is a convenience
+wrapper, not a reimplementation. The tradeoff is you still need Python available.
 
 ## Installation from source
 
