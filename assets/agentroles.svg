@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="yaml" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="engine" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#0d9488"/>
+    </linearGradient>
+    <linearGradient id="out1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+    <linearGradient id="out2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#e11d48"/>
+    </linearGradient>
+    <linearGradient id="out3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="out4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0891b2"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="500" fill="url(#bg)" rx="16"/>
+
+  <!-- Title -->
+  <text x="500" y="45" font-size="22" font-weight="700" fill="#e2e8f0" text-anchor="middle" letter-spacing="1">agentroles</text>
+  <text x="500" y="68" font-size="13" fill="#94a3b8" text-anchor="middle">describe once · generate everywhere</text>
+
+  <!-- YAML file box -->
+  <rect x="60" y="130" width="220" height="260" rx="12" fill="url(#yaml)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="170" y="162" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">agentroles.yaml</text>
+  <line x1="85" y1="174" x2="255" y2="174" stroke="#fff" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="85" y="200" font-size="11" fill="#c7d2fe" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">version: 1</text>
+  <text x="85" y="222" font-size="11" fill="#c7d2fe" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">roles:</text>
+  <text x="85" y="244" font-size="11" fill="#a5f3fc" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">  planner:</text>
+  <text x="85" y="264" font-size="10" fill="#a5f3fc" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">    primary: anthropic/opus</text>
+  <text x="85" y="284" font-size="11" fill="#a5f3fc" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">  implementer:</text>
+  <text x="85" y="304" font-size="10" fill="#a5f3fc" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">    primary: anthropic/haiku</text>
+  <text x="85" y="324" font-size="11" fill="#a5f3fc" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">  reviewer:</text>
+  <text x="85" y="344" font-size="10" fill="#a5f3fc" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">    primary: openai/gpt-5</text>
+  <text x="85" y="368" font-size="10" fill="#c7d2fe" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">targets:</text>
+  <text x="85" y="388" font-size="10" fill="#c7d2fe" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">  - opencode</text>
+  <text x="85" y="406" font-size="10" fill="#c7d2fe" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">  - claude_code</text>
+
+  <!-- Arrow 1 -->
+  <line x1="285" y1="260" x2="355" y2="260" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Engine box -->
+  <rect x="365" y="175" width="180" height="170" rx="16" fill="url(#engine)" filter="url(#glow)" opacity="0.95"/>
+  <!-- Gear icon (simplified) -->
+  <circle cx="455" cy="235" r="28" fill="none" stroke="#fff" stroke-width="3" opacity="0.8"/>
+  <circle cx="455" cy="235" r="10" fill="#fff" opacity="0.8"/>
+  <line x1="455" y1="200" x2="455" y2="207" stroke="#fff" stroke-width="3" opacity="0.6"/>
+  <line x1="455" y1="263" x2="455" y2="270" stroke="#fff" stroke-width="3" opacity="0.6"/>
+  <line x1="420" y1="235" x2="427" y2="235" stroke="#fff" stroke-width="3" opacity="0.6"/>
+  <line x1="483" y1="235" x2="490" y2="235" stroke="#fff" stroke-width="3" opacity="0.6"/>
+  <text x="455" y="295" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">agentroles</text>
+  <text x="455" y="315" font-size="11" fill="#d1fae5" text-anchor="middle">build</text>
+
+  <!-- Arrow 2 (splits into 4) -->
+  <line x1="550" y1="260" x2="610" y2="120" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="550" y1="260" x2="610" y2="220" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="550" y1="260" x2="610" y2="320" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="550" y1="260" x2="610" y2="420" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Output: opencode.json -->
+  <rect x="625" y="70" width="180" height="90" rx="10" fill="url(#out1)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="715" y="100" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">opencode.json</text>
+  <line x1="645" y1="110" x2="785" y2="110" stroke="#fff" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="645" y="130" font-size="10" fill="#fef3c7" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">"agent": [{</text>
+  <text x="645" y="146" font-size="10" fill="#fef3c7" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">  "model": "anthropic/opus"</text>
+
+  <!-- Output: .claude/agents/*.md -->
+  <rect x="625" y="170" width="180" height="90" rx="10" fill="url(#out2)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="715" y="200" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">.claude/agents/*.md</text>
+  <line x1="645" y1="210" x2="785" y2="210" stroke="#fff" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="645" y="230" font-size="10" fill="#fecaca" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">---</text>
+  <text x="645" y="246" font-size="10" fill="#fecaca" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">model: opus</text>
+
+  <!-- Output: .aider.conf.yml -->
+  <rect x="625" y="270" width="180" height="90" rx="10" fill="url(#out3)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="715" y="300" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">.aider.conf.yml</text>
+  <line x1="645" y1="310" x2="785" y2="310" stroke="#fff" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="645" y="330" font-size="10" fill="#e9d5ff" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">model: anthropic/opus</text>
+  <text x="645" y="346" font-size="10" fill="#e9d5ff" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">editor-model: anthropic/haiku</text>
+
+  <!-- Output: litellm-config.yaml -->
+  <rect x="625" y="370" width="180" height="90" rx="10" fill="url(#out4)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="715" y="400" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">litellm-config.yaml</text>
+  <line x1="645" y1="410" x2="785" y2="410" stroke="#fff" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="645" y="430" font-size="10" fill="#cffafe" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">model_list:</text>
+  <text x="645" y="446" font-size="10" fill="#cffafe" font-family="'SF Mono','Menlo','Monaco','Consolas',monospace">  - model_name: role-planner</text>
+
+  <!-- Tagline at bottom -->
+  <text x="500" y="480" font-size="11" fill="#475569" text-anchor="middle">One source of truth · Zero tool-specific config files to maintain · Delete agentroles, your configs keep working</text>
+</svg>

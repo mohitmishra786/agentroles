@@ -4,6 +4,10 @@
 > — borrowed from a conversation with a colleague who was tired of editing five
 > config files every time we swapped a model
 
+<p align="center">
+  <img src="assets/agentroles.svg" width="800" alt="agentroles workflow diagram">
+</p>
+
 Here's the problem: every single agentic coding tool (OpenCode, Claude Code,
 Aider, LiteLLM) lets you assign different models to different roles.
 That's table stakes now. The real friction is that they each invented their own
@@ -158,6 +162,10 @@ reported explicitly in the build output: "these roles are not representable in
 Aider, skipping." You'll see exactly which ones and why. They're not silently dropped.
 
 ## Routing modes
+
+<p align="center">
+  <img src="assets/routing.svg" width="700" alt="Static vs dynamic routing in agentroles">
+</p>
 
 ### Static (the default)
 
