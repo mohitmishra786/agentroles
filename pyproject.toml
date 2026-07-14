@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "agentroles"
-version = {attr = "agentroles.__version__"}
+version = "0.1.1"
 description = "Tool-agnostic role-to-model mapping for agentic coding workflows"
 readme = "README.md"
 license = {text = "Apache-2.0"}
