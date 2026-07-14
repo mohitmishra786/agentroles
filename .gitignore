@@ -9,6 +9,9 @@ build/
 .pytest_cache/
 node_modules/
 .DS_Store
-
+.env
+.env.*
+*.token
 opencode.json
 agentroles.yaml
+*.log
