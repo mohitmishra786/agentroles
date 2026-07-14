@@ -1,6 +1,6 @@
 {
   "name": "@mohitmishra7/agentroles",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Tool-agnostic role-to-model mapping for agentic coding workflows — npm wrapper for the Python package",
   "license": "Apache-2.0",
   "author": "mohitmishra786",
