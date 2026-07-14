@@ -1,0 +1,11 @@
+version: 1
+
+roles:
+  planner:
+    primary: anthropic/claude-sonnet-5
+
+routing:
+  mode: static
+
+targets:
+  - opencode: ./opencode.json

@@ -1,0 +1,10 @@
+version: 1
+
+roles:
+  planner:
+    primary: anthropic/claude-sonnet-5
+  reviewer:
+    primary: openai/gpt-5.5
+
+targets:
+  - claude_code: ./.claude/agents/

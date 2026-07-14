@@ -1,0 +1,7 @@
+version: 1
+
+routing:
+  mode: static
+
+targets:
+  - opencode: ./opencode.json

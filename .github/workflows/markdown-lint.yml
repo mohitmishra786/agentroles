@@ -1,0 +1,26 @@
+name: Markdown Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  markdownlint:
+    name: markdownlint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: DavidAnson/markdownlint-cli2-action@v19
+        with:
+          config: .markdownlint.jsonc
+          globs: |
+            *.md
+            targets/**/*.md
+            .github/**/*.md
+          ignores: |
+            multi-model-agentic-coding-report.md
+            docs/targets-research.md

@@ -1,0 +1,54 @@
+name: Bug Report
+description: Report a bug in agentroles
+title: "[Bug] "
+labels: ["bug"]
+assignees: []
+body:
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: To Reproduce
+      description: "Steps to reproduce the behavior:"
+      value: |
+        1. Create an `agentroles.yaml` with the following content:
+           ```yaml
+           # paste config here
+           ```
+        2. Run `agentroles build`
+        3. See error
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: What you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Actual behavior
+      description: What actually happened, including any error messages.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Environment
+      description: Information about your setup.
+      value: |
+        - OS: [e.g., macOS 15, Ubuntu 24.04]
+        - Python version: [e.g., 3.12.3]
+        - agentroles version: [e.g., 0.1.0]
+        - Installation method: [pip install / from source]
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.
+    validations:
+      required: false
