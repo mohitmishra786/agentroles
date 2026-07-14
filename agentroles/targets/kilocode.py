@@ -6,6 +6,8 @@ from pathlib import Path
 from agentroles.models import AgentRolesConfig, TargetType
 from agentroles.plugin import GenerationResult, TargetGenerator
 
+_PRIMARY_ROLES = {"planner", "implementer"}
+
 
 class KiloCodeGenerator(TargetGenerator):
     @property
@@ -16,6 +18,7 @@ class KiloCodeGenerator(TargetGenerator):
         agents: dict[str, dict] = {}
         for role_name, role_config in config.roles.items():
             agent_entry: dict = {
+                "mode": "primary" if role_name in _PRIMARY_ROLES else "subagent",
                 "model": role_config.primary,
             }
             if role_config.notes:
@@ -23,7 +26,7 @@ class KiloCodeGenerator(TargetGenerator):
             agents[role_name] = agent_entry
         return {
             "agent_type": "kilocode",
-            "agents": agents,
+            "agent": agents,
         }
 
     def generate(

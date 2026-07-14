@@ -16,8 +16,8 @@ The generated file includes `agent_type: "kilocode"` metadata to distinguish it 
 
 Kilo Code reads configuration in the same format as OpenCode's `opencode.json`:
 
-- Top-level `agents` block mapping role names to model configurations
-- Each agent has a `model` field and optional `description`
+- Top-level `agent` block mapping role names to model configurations
+- Each agent has a `model` field, `mode` field, and optional `description`
 
 The only difference is the `agent_type` metadata field, which is ignored by
 OpenCode but helps identify the config's target tool.

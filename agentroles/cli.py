@@ -59,27 +59,31 @@ version: 1
 roles:
   planner:
     primary: anthropic/claude-opus-4-8
-    fallback: [openai/gpt-5.5]
-    max_cost_per_call_usd: 0.50
-    notes: "High-stakes reasoning, architecture decisions, ambiguity resolution."
+    notes: "Orchestrator — architecture, planning, and design decisions."
 
   implementer:
-    primary: anthropic/claude-haiku-4-5
-    fallback: [openai/gpt-4o-mini]
-    max_cost_per_call_usd: 0.02
-    notes: "Mechanical edits once a plan exists. High call volume."
+    primary: anthropic/claude-sonnet-4-6
+    notes: "Implementation and coding tasks."
 
   reviewer:
-    primary: openai/gpt-5.5
-    fallback: [anthropic/claude-sonnet-5]
-    notes: "Model-diversity review reduces correlated blind spots."
+    primary: anthropic/claude-sonnet-4-6
+    notes: "Code review and quality checks."
+
+  researcher:
+    primary: anthropic/claude-opus-4-8
+    notes: "Research, deep reasoning, and ambiguity resolution."
+
+  fixer:
+    primary: anthropic/claude-haiku-4-5
+    notes: "Basic bug fixes and mechanical replacements."
 
   tester:
     primary: anthropic/claude-haiku-4-5
-    fallback: [openai/gpt-4o-mini]
+    notes: "Test generation and validation."
 
   summarizer:
     primary: anthropic/claude-haiku-4-5
+    notes: "Summarization and commit messages."
 
 routing:
   mode: static

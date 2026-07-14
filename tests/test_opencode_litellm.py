@@ -26,12 +26,15 @@ class TestOpenCodeGenerator:
             output_path = Path(result.files_written[0])
             assert output_path.exists()
             content = json.loads(output_path.read_text())
-            assert "agents" in content
-            agents = content["agents"]
+            assert "agent" in content
+            agents = content["agent"]
             assert "planner" in agents
             assert agents["planner"]["model"] == "anthropic/claude-opus-4-8"
+            assert agents["planner"]["mode"] == "primary"
             assert agents["implementer"]["model"] == "anthropic/claude-haiku-4-5"
+            assert agents["implementer"]["mode"] == "primary"
             assert agents["reviewer"]["model"] == "openai/gpt-5.5"
+            assert agents["reviewer"]["mode"] == "subagent"
             assert agents["tester"]["model"] == "anthropic/claude-haiku-4-5"
             assert agents["summarizer"]["model"] == "anthropic/claude-haiku-4-5"
 
@@ -46,7 +49,7 @@ class TestOpenCodeGenerator:
 
             output_path = Path(result.files_written[0])
             content = json.loads(output_path.read_text())
-            planner = content["agents"]["planner"]
+            planner = content["agent"]["planner"]
             assert "description" in planner
             assert "High-stakes" in planner["description"]
 

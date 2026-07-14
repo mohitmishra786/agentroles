@@ -6,6 +6,8 @@ from pathlib import Path
 from agentroles.models import AgentRolesConfig, TargetType
 from agentroles.plugin import GenerationResult, TargetGenerator
 
+_PRIMARY_ROLES = {"planner", "implementer"}
+
 
 class OpenCodeGenerator(TargetGenerator):
     @property
@@ -16,12 +18,13 @@ class OpenCodeGenerator(TargetGenerator):
         agents: dict[str, dict] = {}
         for role_name, role_config in config.roles.items():
             agent_entry: dict = {
+                "mode": "primary" if role_name in _PRIMARY_ROLES else "subagent",
                 "model": role_config.primary,
             }
             if role_config.notes:
                 agent_entry["description"] = role_config.notes
             agents[role_name] = agent_entry
-        return {"agents": agents}
+        return {"agent": agents}
 
     def generate(
         self, config: AgentRolesConfig, base_dir: Path, result: GenerationResult
