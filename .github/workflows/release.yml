@@ -1,13 +1,15 @@
-name: Release (Test PyPI + NPM)
+name: Auto Bump & Release
 
 on:
   push:
-    tags:
-      - "v*.*.*"
+    branches: [main]
 
 jobs:
-  release:
-    name: Build & Publish (Test PyPI + NPM)
+  bump-release:
+    name: Bump, Build, Release
+    if: |
+      !contains(github.event.head_commit.message, '[skip ci]') &&
+      !contains(github.event.head_commit.message, 'chore: bump version')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -18,6 +20,52 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+
+      - name: Determine version
+        id: ver
+        run: |
+          V=$(grep -oP '__version__ = "\K[0-9]+\.[0-9]+\.[0-9]+' agentroles/__init__.py)
+          echo "current=$V" >> "$GITHUB_OUTPUT"
+          if git rev-parse "v$V" >/dev/null 2>&1; then
+            echo "Tag v$V exists — version is final."
+            echo "final=$V" >> "$GITHUB_OUTPUT"
+          else
+            echo "Tag v$V missing — will bump patch."
+            echo "final=$V" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Bump patch version
+        if: success()
+        run: |
+          V="${{ steps.ver.outputs.current }}"
+          if git rev-parse "v$V" >/dev/null 2>&1; then
+            echo "Already tagged — skip bump."
+            exit 0
+          fi
+          M=$(echo $V | cut -d. -f1)
+          m=$(echo $V | cut -d. -f2)
+          P=$(( $(echo $V | cut -d. -f3) + 1 ))
+          NEW="$M.$m.$P"
+          echo "Bumping $V → $NEW"
+
+          sed -i "s/__version__ = \"$V\"/__version__ = \"$NEW\"/" agentroles/__init__.py
+          sed -i "s/version = \"$V\"/version = \"$NEW\"/" pyproject.toml
+          sed -i "s/\"version\": \"$V\"/\"version\": \"$NEW\"/" npm/package.json
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add agentroles/__init__.py pyproject.toml npm/package.json
+          git commit -m "chore: bump version to v$NEW [skip ci]"
+          git tag "v$NEW"
+          git push origin main "v$NEW"
+
+          echo "final=$NEW" >> "$GITHUB_OUTPUT"
+
+      - name: Resolve release version
+        id: rel
+        run: |
+          V=$(grep -oP '__version__ = "\K[0-9]+\.[0-9]+\.[0-9]+' agentroles/__init__.py)
+          echo "version=$V" >> "$GITHUB_OUTPUT"
 
       - uses: actions/setup-python@v5
         with:
@@ -49,8 +97,14 @@ jobs:
 
       - name: Publish npm wrapper
         working-directory: npm
-        run: |
-          npm ci
-          npm publish --access public
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.rel.outputs.version }}
+          name: v${{ steps.rel.outputs.version }}
+          generate_release_notes: true
+          files: dist/*
