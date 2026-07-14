@@ -1,0 +1,47 @@
+name: Publish to PyPI
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to publish (e.g. 0.1.1)"
+        required: true
+        type: string
+
+jobs:
+  publish:
+    name: Publish to PyPI
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify version
+        run: |
+          PROJECT_VERSION=$(python -c "from agentroles import __version__; print(__version__)")
+          if [ "$PROJECT_VERSION" != "${{ inputs.version }}" ]; then
+            echo "Error: Input version (${{ inputs.version }}) does not match project version ($PROJECT_VERSION)"
+            exit 1
+          fi
+          echo "Version $PROJECT_VERSION verified"
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build
+
+      - name: Build packages
+        run: python -m build --sdist --wheel
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_TOKEN }}
