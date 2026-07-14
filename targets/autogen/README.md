@@ -32,6 +32,7 @@ python autogen_agents.py
 ## Limitations
 
 - The selector model defaults to the first role's primary model — adjust if you want a different router
-- `OpenAIChatCompletionClient` is used for all providers; provider-specific authentication must be configured via environment variables
+- `OpenAIChatCompletionClient` is used for all providers; provider-specific
+  authentication must be configured via environment variables
 - Fallback models from `agentroles.yaml` are not wired into AutoGen
 - Termination conditions are not set — add `MaxMessageTermination` or `TextMentionTermination` for production use

@@ -4,7 +4,8 @@
 
 If you discover a security vulnerability in agentroles, please report it privately. Do not open a public issue.
 
-Send a detailed description of the vulnerability to the maintainers via GitHub's private vulnerability reporting feature:
+Send a detailed description of the vulnerability to the maintainers via
+GitHub's private vulnerability reporting feature:
 
 1. Go to the [Security tab](https://GitHub.com/mohitmishra786/agentroles/security) on the repository
 2. Click "Report a vulnerability"
@@ -38,7 +39,8 @@ Only the latest release receives security patches. Backports to older versions a
 - Keep agentroles updated to the latest version
 - Do not commit `agentroles.yaml` files containing API keys to public repositories
 - Review generated config files before using them in production
-- When using the LiteLLM proxy target, ensure the generated config uses environment variable references for API keys, not hardcoded values
+- When using the LiteLLM proxy target, ensure the generated config
+  uses environment variable references for API keys, not hardcoded values
 
 ## Supply Chain
 
