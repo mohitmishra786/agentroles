@@ -213,7 +213,7 @@ agentroles migrate     # No-op for schema v1. Exists so the schema version field
 If you'd rather use npx than manage a Python environment:
 
 ```bash
-npx agentroles init
+npx @mohitmishra7/agentroles init
 ```
 
 The npm package shells out to the Python package. It checks for Python 3.11+ on
